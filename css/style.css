@@ -1,40 +1,23 @@
-/* - 0. FONT FAMILY - */
-@font-face { font-family: 'Cy'; src: url('../fonts/Cy-Thin.ttf') format('truetype'); font-weight: 100; }
-@font-face { font-family: 'Cy'; src: url('../fonts/Cy-Regular.ttf') format('truetype'); font-weight: 400; }
-@font-face { font-family: 'Cy'; src: url('../fonts/Cy-Bold.ttf') format('truetype'); font-weight: 700; }
-@font-face { font-family: 'Cy'; src: url('../fonts/Cy-Black.ttf') format('truetype'); font-weight: 900; }
-
-/* - 1. DESIGN SYSTEM / TOKENS - */
+/* - DESIGN TOKENS - */
 :root {
-    --container-width: 1112px;
-    --grid-gap: 24px;
-    --thumb-width: 480px;
-    --thumb-height: 300px;
-    --Grey-950: #0c0c0c;
-    --Grey-50: #ffffff;
-    --Primary-Pink-500: #DA588C;
-    --Red-500: #EF2313;
-    --Red-800: #A6190E;
-    --black: var(--Grey-950);
-    --white: var(--Grey-50);
-    --font-main: 'Cy', sans-serif;
+    --black: #0c0c0c;
+    --white: #ffffff;
+    --pink: #da588c;
     --space-xl: 64px;
-    --space-xxl: 128px;
 }
 
-/* - 2. GLOBAL STYLES - */
-html, body { margin: 0; padding: 0; width: 100%; min-height: 100vh; background-color: var(--black); } /* Black base to prevent white flash */
-body { font-family: var(--font-main); color: var(--black); -webkit-font-smoothing: antialiased; }
+/* - GLOBAL - */
+html, body { margin: 0; padding: 0; background-color: var(--black); min-height: 100vh; overflow-x: hidden; }
+body { font-family: 'Cy', sans-serif; -webkit-font-smoothing: antialiased; }
 
-/* - 3. BACKGROUND LAYERS (THE DOUBLE BUFFER) - */
+/* - BACKGROUND LAYERS - */
 .bg-layer { 
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-size: cover; background-position: center; background-repeat: no-repeat;
-    transition: opacity 0.4s ease-in-out; /* Slightly slower for smoother transitions */
-    z-index: 1; /* Sit behind everything but in front of the body */
+    transition: opacity 0.3s ease-in-out; 
+    z-index: 1; 
 }
-
-/* ENSURE FILENAMES MATCH GITHUB EXACTLY (LOWERCASE RECOMMENDED) */
+/* Using relative-to-root paths for stability */
 .bg-1 { background-image: url('../images/bg1.avif'); }
 .bg-2 { background-image: url('../images/bg2.avif'); }
 .bg-3 { background-image: url('../images/bg3.avif'); }
@@ -42,39 +25,37 @@ body { font-family: var(--font-main); color: var(--black); -webkit-font-smoothin
 .bg-5 { background-image: url('../images/bg5.avif'); }
 .bg-6 { background-image: url('../images/bg6.avif'); }
 
-/* - 4. SITE WRAPPER - */
+/* - SITE CONTENT - */
 .site-wrapper { 
     position: relative; 
-    z-index: 10; /* Must be higher than bg-layers */
-    width: var(--container-width); 
-    max-width: 100%; 
+    z-index: 10; 
+    width: 1112px; max-width: 95%; 
     margin: 0 auto; 
-    background-color: rgba(255, 255, 255, 0.95); /* Slight transparency looks better */
+    background-color: var(--white); 
     padding: var(--space-xl); 
     box-sizing: border-box; 
     min-height: 100vh; 
 }
 
-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xxl); }
-.logo-container { position: relative; display: inline-block; }
-.main-logo { display: block; width: 448px; height: auto; max-width: 100%; }
-.logo-hover-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; cursor: pointer; }
+header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 128px; }
+.main-logo { width: 448px; height: auto; display: block; max-width: 100%; }
 
-/* - 5. GALLERY GRID - */
-.gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--grid-gap); }
+/* - GRID - */
+.gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .gallery-item { 
     position: relative; 
-    width: 100%; 
-    aspect-ratio: 480 / 300; 
-    background-color: #ddd; 
-    background-size: cover; 
-    background-position: center; 
-    cursor: pointer; 
+    width: 100%; aspect-ratio: 480 / 300; 
+    background-size: cover; background-position: center; 
+    background-color: #eee; cursor: pointer; 
 }
 
-/* - 6. LIGHTBOX & MOBILE - */
+/* - LIGHTBOX - */
+.lightbox-container { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+.lightbox-content { display: flex; flex-direction: column; align-items: center; max-width: 90%; }
+#lightbox-img { max-width: 100%; max-height: 70vh; object-fit: contain; }
+
+/* - MOBILE - */
 @media (max-width: 1150px) {
-    .site-wrapper { padding: 24px; }
     header { flex-direction: column; align-items: center; gap: 32px; }
-    .gallery-grid { grid-template-columns: 1fr; } /* Fix for mobile thumbnails not showing/shrinking */
+    .gallery-grid { grid-template-columns: 1fr; }
 }
