@@ -30,7 +30,6 @@ $(document).ready(function() {
         const data = $(this).attr('data-src');
         images = data.split(',').map(s => s.trim());
         sIndex = 0;
-        
         $('#project-title').text($(this).attr('data-title'));
         $('#project-desc').text($(this).attr('data-desc'));
         update();

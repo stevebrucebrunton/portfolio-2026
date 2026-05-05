@@ -1,20 +1,20 @@
-/* - FONT FAMILY - */
+/* - 0. FONT FAMILY - */
 @font-face { font-family: 'Cy'; src: url('../fonts/Cy-Thin.ttf') format('truetype'); font-weight: 100; }
 @font-face { font-family: 'Cy'; src: url('../fonts/Cy-Regular.ttf') format('truetype'); font-weight: 400; }
 @font-face { font-family: 'Cy'; src: url('../fonts/Cy-Bold.ttf') format('truetype'); font-weight: 700; }
 @font-face { font-family: 'Cy'; src: url('../fonts/Cy-Black.ttf') format('truetype'); font-weight: 900; }
 
-/* - GLOBAL - */
-* { box-sizing: border-box; } /* Crucial for spacing */
+/* - 1. GLOBAL RESET - */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { 
-    margin: 0; padding: 0; 
     background-color: #0c0c0c; 
     min-height: 100vh; 
-    overflow-x: hidden; /* KILL THE GHOST SCROLL */
+    width: 100%;
+    overflow-x: hidden; /* Absolute kill for horizontal scroll */
 }
 body { font-family: 'Cy', sans-serif; -webkit-font-smoothing: antialiased; }
 
-/* - BACKGROUND LAYERS - */
+/* - 2. BACKGROUND LAYERS - */
 .bg-layer { 
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-size: cover; background-position: center; background-repeat: no-repeat;
@@ -28,22 +28,30 @@ body { font-family: 'Cy', sans-serif; -webkit-font-smoothing: antialiased; }
 .bg-5 { background-image: url('../images/bg5.avif'); }
 .bg-6 { background-image: url('../images/bg6.avif'); }
 
-/* - SITE WRAPPER - */
+/* - 3. SITE CONTENT - */
 .site-wrapper { 
     position: relative; 
     z-index: 10; 
-    width: 1112px; max-width: 100%; 
+    width: 1112px; 
+    max-width: 100%; 
     margin: 0 auto; 
     background-color: rgba(255, 255, 255, 0.95); 
     padding: 64px; 
-    box-sizing: border-box; 
     min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
 }
 
-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 128px; width: 100%; }
+header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-end; 
+    margin-bottom: 128px; 
+    width: 100%; 
+}
 
-/* LOGO FIX */
-.logo-container { position: relative; width: 448px; max-width: 100%; display: inline-block; }
+/* LOGO FIX: USES VIEWPORT WIDTH FOR MOBILE */
+.logo-container { position: relative; width: 448px; max-width: 90vw; }
 .main-logo { width: 100%; height: auto; display: block; }
 .logo-hover-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; cursor: pointer; }
 
@@ -52,7 +60,7 @@ header { display: flex; justify-content: space-between; align-items: flex-end; m
 .main-nav a { text-transform: uppercase; text-decoration: none; color: #000; font-size: 16px; }
 .main-nav a.active { font-weight: 700; }
 
-/* - GRID - */
+/* - 4. GRID - */
 .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; width: 100%; }
 .gallery-item { 
     position: relative; 
@@ -61,18 +69,16 @@ header { display: flex; justify-content: space-between; align-items: flex-end; m
     background-color: #eee; cursor: pointer; 
 }
 
-/* - LIGHTBOX - */
+/* - 5. LIGHTBOX - */
 .lightbox-container { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
 .lightbox-content { display: flex; flex-direction: column; align-items: center; max-width: 90%; }
 #lightbox-img { max-width: 100%; max-height: 70vh; object-fit: contain; cursor: pointer; }
 .project-text { margin-bottom: 16px; color: #fff; text-align: center; }
 .close-btn { position: absolute; top: 32px; right: 48px; color: #fff; font-size: 48px; cursor: pointer; z-index: 1003; }
 .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; font-size: 64px; cursor: pointer; padding: 24px; z-index: 1003; }
-.prev-btn { left: 16px; }
-.next-btn { right: 16px; }
 #page-counter { color: #DA588C; font-weight: 700; margin-top: 16px; letter-spacing: 2px; }
 
-/* - MOBILE RESPONSIVENESS - */
+/* - 6. MOBILE RESPONSIVENESS - */
 @media (max-width: 1150px) {
     .site-wrapper { padding: 32px; }
     header { 
@@ -82,7 +88,7 @@ header { display: flex; justify-content: space-between; align-items: flex-end; m
         gap: 32px; 
         margin-bottom: 64px;
     }
-    .logo-container { width: 100%; max-width: 300px; } /* Forced size for phone */
+    .logo-container { width: 90vw; } /* Logo forced to 90% of screen width */
     .main-nav { justify-content: center; width: 100%; }
     .gallery-grid { grid-template-columns: 1fr; }
 }
