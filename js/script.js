@@ -1,21 +1,22 @@
 $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
-    /* - 1. BACKGROUND CYCLER & IMAGE PRELOADER - */
-    // Updated to .avif extensions to match your new files
-    const bgList = [
-        'images/bg1.avif', 
-        'images/bg2.avif', 
-        'images/bg3.avif', 
-        'images/bg4.avif', 
-        'images/bg5.avif', 
-        'images/bg6.avif'
-    ];
+    /* - 1. BACKGROUND CYCLER - */
+    // Simpler cycler using the 6 layers pre-rendered in HTML
+    let currentBgIndex = 1;
+    const totalBgs = 6;
 
-    // Preload background images
-    $(bgList).each(function() { $('<img/>')[0].src = this; });
+    $('.magic-trigger').on('mouseenter', function() {
+        let nextBgIndex = (currentBgIndex % totalBgs) + 1;
+        
+        // Instantly swap opacity of the pre-loaded layers
+        $(`.bg-${currentBgIndex}`).css('opacity', 0);
+        $(`.bg-${nextBgIndex}`).css('opacity', 1);
+        
+        currentBgIndex = nextBgIndex;
+    });
 
-    // Preload gallery images
+    /* - GALLERY IMAGE PRELOADER (Left completely untouched) - */
     let galleryImagesToPreload = [];
     $('.gallery-item').each(function() {
         const srcs = $(this).attr('data-src').split(',');
@@ -25,26 +26,7 @@ $(document).ready(function() {
         $('<img/>')[0].src = this; 
     });
 
-    /* - INITIALIZE FIRST STATE - */
-    // This forces the first image to load immediately on page hit
-    let currentIndex = 0;
-    let isBg2Active = false;
-    $('.bg-1').css('background-image', 'url(' + bgList[currentIndex] + ')').css('opacity', 1);
-
-    $('.magic-trigger').on('mouseenter', function() {
-        currentIndex = (currentIndex + 1) % bgList.length;
-        const newImg = 'url(' + bgList[currentIndex] + ')';
-
-        if (isBg2Active) {
-            $('.bg-1').css('background-image', newImg);
-            $('.bg-2').css('opacity', 0);
-        } else {
-            $('.bg-2').css('background-image', newImg).css('opacity', 1);
-        }
-        isBg2Active = !isBg2Active;
-    });
-
-    /* - 2. LIGHTBOX SEAMLESS SLIDER - */
+    /* - 2. LIGHTBOX SEAMLESS SLIDER (Left completely untouched) - */
     const $galleryItems = $('.gallery-item');
     let currentProjectIndex = 0;
     let currentImages = []; 
@@ -119,7 +101,7 @@ $(document).ready(function() {
         }
     });
 
-    /* - 3. CONTACT FORM SUBMISSION - */
+    /* - 3. CONTACT FORM SUBMISSION (Left completely untouched) - */
     $('#contact-form').on('submit', function(e) {
         e.preventDefault(); 
         const $form = $(this);

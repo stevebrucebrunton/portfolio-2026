@@ -39,7 +39,8 @@
 
 /* - 2. GLOBAL STYLES - */
 html { overflow-y: scroll; }
-body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; }
+/* Changed background-color from var(--white) to var(--black) to kill the flash on wide screens */
+body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--black); -webkit-font-smoothing: antialiased; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 p { font-size: 16px; font-weight: 400; margin-bottom: var(--space-l); }
 a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: var(--black); transition: color 0.2s; }
@@ -49,9 +50,16 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-size: cover; background-position: center; background-repeat: no-repeat;
     transition: opacity 0.2s ease-in-out; 
+    z-index: -100; /* Kept your exact z-index approach */
 }
-.bg-1 { background-image: url('../images/bg1.avif'); z-index: -100; }
-.bg-2 { z-index: -99; }
+
+/* Hardcoded to prevent CSS lookup delay */
+.bg-1 { background-image: url('../images/bg1.avif'); z-index: -106; }
+.bg-2 { background-image: url('../images/bg2.avif'); z-index: -105; }
+.bg-3 { background-image: url('../images/bg3.avif'); z-index: -104; }
+.bg-4 { background-image: url('../images/bg4.avif'); z-index: -103; }
+.bg-5 { background-image: url('../images/bg5.avif'); z-index: -102; }
+.bg-6 { background-image: url('../images/bg6.avif'); z-index: -101; }
 
 .site-wrapper { position: relative; z-index: 10; width: var(--container-width); max-width: 100%; margin: 0 auto; background-color: var(--white); padding: var(--space-xl); box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; }
 
