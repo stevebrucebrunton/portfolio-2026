@@ -2,9 +2,20 @@ $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
     /* - 1. BACKGROUND CYCLER & IMAGE PRELOADER - */
-    const bgList = ['images/bg1.avif', 'images/bg2.avif', 'images/bg3.avif', 'images/bg4.avif', 'images/bg5.avif', 'images/bg6.avif'];
+    // Updated to .avif extensions to match your new files
+    const bgList = [
+        'images/bg1.avif', 
+        'images/bg2.avif', 
+        'images/bg3.avif', 
+        'images/bg4.avif', 
+        'images/bg5.avif', 
+        'images/bg6.avif'
+    ];
+
+    // Preload background images
     $(bgList).each(function() { $('<img/>')[0].src = this; });
 
+    // Preload gallery images
     let galleryImagesToPreload = [];
     $('.gallery-item').each(function() {
         const srcs = $(this).attr('data-src').split(',');
@@ -14,8 +25,11 @@ $(document).ready(function() {
         $('<img/>')[0].src = this; 
     });
 
+    /* - INITIALIZE FIRST STATE - */
+    // This forces the first image to load immediately on page hit
     let currentIndex = 0;
     let isBg2Active = false;
+    $('.bg-1').css('background-image', 'url(' + bgList[currentIndex] + ')').css('opacity', 1);
 
     $('.magic-trigger').on('mouseenter', function() {
         currentIndex = (currentIndex + 1) % bgList.length;
@@ -105,7 +119,7 @@ $(document).ready(function() {
         }
     });
 
-    /* - 3. CONTACT FORM SUBMISSION (NETLIFY AJAX) - */
+    /* - 3. CONTACT FORM SUBMISSION - */
     $('#contact-form').on('submit', function(e) {
         e.preventDefault(); 
         const $form = $(this);
