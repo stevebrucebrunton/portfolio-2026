@@ -1,21 +1,23 @@
 $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
-    /* - 1. BACKGROUND CYCLER & IMAGE PRELOADER - */
-    // Updated to .avif extensions to match your new files
-    const bgList = [
-        'images/bg1.avif', 
-        'images/bg2.avif', 
-        'images/bg3.avif', 
-        'images/bg4.avif', 
-        'images/bg5.avif', 
-        'images/bg6.avif'
-    ];
+    /* - 1. BACKGROUND CYCLER - */
+    // Logic: Toggle the opacity of the 6 layers pre-defined in HTML/CSS
+    let currentBgIndex = 1;
+    const totalBgs = 6;
 
-    // Preload background images
-    $(bgList).each(function() { $('<img/>')[0].src = this; });
+    $('.magic-trigger').on('mouseenter', function() {
+        // Identify the next layer to show
+        let nextBgIndex = (currentBgIndex % totalBgs) + 1;
+        
+        // Instant opacity swap (Double-Buffer)
+        $(`.bg-${currentBgIndex}`).css('opacity', 0);
+        $(`.bg-${nextBgIndex}`).css('opacity', 1);
+        
+        currentBgIndex = nextBgIndex;
+    });
 
-    // Preload gallery images
+    /* - PRELOAD GALLERY IMAGES - */
     let galleryImagesToPreload = [];
     $('.gallery-item').each(function() {
         const srcs = $(this).attr('data-src').split(',');
@@ -23,25 +25,6 @@ $(document).ready(function() {
     });
     $(galleryImagesToPreload).each(function() { 
         $('<img/>')[0].src = this; 
-    });
-
-    /* - INITIALIZE FIRST STATE - */
-    // This forces the first image to load immediately on page hit
-    let currentIndex = 0;
-    let isBg2Active = false;
-    $('.bg-1').css('background-image', 'url(' + bgList[currentIndex] + ')').css('opacity', 1);
-
-    $('.magic-trigger').on('mouseenter', function() {
-        currentIndex = (currentIndex + 1) % bgList.length;
-        const newImg = 'url(' + bgList[currentIndex] + ')';
-
-        if (isBg2Active) {
-            $('.bg-1').css('background-image', newImg);
-            $('.bg-2').css('opacity', 0);
-        } else {
-            $('.bg-2').css('background-image', newImg).css('opacity', 1);
-        }
-        isBg2Active = !isBg2Active;
     });
 
     /* - 2. LIGHTBOX SEAMLESS SLIDER - */
@@ -52,7 +35,6 @@ $(document).ready(function() {
 
     function updateLightboxContent() {
         $('#lightbox-img').attr('src', currentImages[currentSubIndex]);
-
         if (currentImages.length > 1) {
             $('#page-counter').text(`${currentSubIndex + 1} / ${currentImages.length}`).css('visibility', 'visible');
         } else {
@@ -66,12 +48,9 @@ $(document).ready(function() {
         const srcData = $item.attr('data-src');
         currentImages = srcData.split(',').map(s => s.trim());
         currentSubIndex = subIndex;
-
         $('#project-title').text($item.attr('data-title'));
         $('#project-desc').text($item.attr('data-desc'));
-
         updateLightboxContent();
-
         if (!$('#lightbox').is(':visible')) {
             $('#lightbox').css('display', 'flex').hide().fadeIn(200);
         }
@@ -82,8 +61,7 @@ $(document).ready(function() {
             currentSubIndex++;
             updateLightboxContent();
         } else {
-            let newIndex = currentProjectIndex + 1;
-            if (newIndex >= $galleryItems.length) newIndex = 0;
+            let newIndex = (currentProjectIndex + 1) % $galleryItems.length;
             openLightbox(newIndex, 0);
         }
     }
@@ -93,8 +71,7 @@ $(document).ready(function() {
             currentSubIndex--;
             updateLightboxContent();
         } else {
-            let newIndex = currentProjectIndex - 1;
-            if (newIndex < 0) newIndex = $galleryItems.length - 1;
+            let newIndex = (currentProjectIndex - 1 + $galleryItems.length) % $galleryItems.length;
             const prevItemSrc = $galleryItems.eq(newIndex).attr('data-src');
             const prevImages = prevItemSrc.split(',').map(s => s.trim());
             openLightbox(newIndex, prevImages.length - 1);
@@ -104,7 +81,6 @@ $(document).ready(function() {
     $galleryItems.on('click', function() { openLightbox($galleryItems.index(this)); });
     $('.next-btn, #lightbox-img').on('click', function(e) { e.stopPropagation(); nextMedia(); });
     $('.prev-btn').on('click', function(e) { e.stopPropagation(); prevMedia(); });
-
     $('.close-btn, #lightbox').on('click', function(e) {
         if (!$(e.target).closest('.lightbox-content').length || $(e.target).is('.close-btn')) {
             $('#lightbox').fadeOut(200);
@@ -113,9 +89,9 @@ $(document).ready(function() {
 
     $(document).on('keydown', function(e) {
         if ($('#lightbox').is(':visible')) {
-            if (e.which === 37) { prevMedia(); }
-            if (e.which === 39) { nextMedia(); }
-            if (e.which === 27) { $('.close-btn').trigger('click'); }
+            if (e.which === 37) prevMedia();
+            if (e.which === 39) nextMedia();
+            if (e.which === 27) $('.close-btn').trigger('click');
         }
     });
 
@@ -124,7 +100,6 @@ $(document).ready(function() {
         e.preventDefault(); 
         const $form = $(this);
         const $message = $('#success-message');
-        
         $.ajax({
             type: "POST",
             url: "/",
