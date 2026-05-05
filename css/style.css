@@ -4,8 +4,16 @@
 @font-face { font-family: 'Cy'; src: url('../fonts/Cy-Bold.ttf') format('truetype'); font-weight: 700; }
 @font-face { font-family: 'Cy'; src: url('../fonts/Cy-Black.ttf') format('truetype'); font-weight: 900; }
 
+/* - DESIGN TOKENS - */
+:root {
+    --black: #0c0c0c;
+    --white: #ffffff;
+    --pink: #da588c;
+    --space-xl: 64px;
+}
+
 /* - GLOBAL - */
-html, body { margin: 0; padding: 0; background-color: #0c0c0c; min-height: 100vh; overflow-x: hidden; }
+html, body { margin: 0; padding: 0; background-color: var(--black); min-height: 100vh; overflow-x: hidden; }
 body { font-family: 'Cy', sans-serif; -webkit-font-smoothing: antialiased; }
 
 /* - BACKGROUND LAYERS (AVIF) - */
@@ -13,7 +21,7 @@ body { font-family: 'Cy', sans-serif; -webkit-font-smoothing: antialiased; }
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-size: cover; background-position: center; background-repeat: no-repeat;
     transition: opacity 0.3s ease-in-out; 
-    z-index: 1; /* Sits behind content but above body black */
+    z-index: 1; 
 }
 .bg-1 { background-image: url('../images/bg1.avif'); }
 .bg-2 { background-image: url('../images/bg2.avif'); }
@@ -22,15 +30,14 @@ body { font-family: 'Cy', sans-serif; -webkit-font-smoothing: antialiased; }
 .bg-5 { background-image: url('../images/bg5.avif'); }
 .bg-6 { background-image: url('../images/bg6.avif'); }
 
-/* - SITE WRAPPER - */
+/* - SITE CONTENT - */
 .site-wrapper { 
     position: relative; 
-    z-index: 10; /* Must be higher than bg-layers */
+    z-index: 10; 
     width: 1112px; max-width: 95%; 
     margin: 0 auto; 
-    /* 0.95 transparency lets the background grit bleed through */
     background-color: rgba(255, 255, 255, 0.95); 
-    padding: 64px; 
+    padding: var(--space-xl); 
     box-sizing: border-box; 
     min-height: 100vh; 
 }
@@ -51,7 +58,6 @@ header { display: flex; justify-content: space-between; align-items: flex-end; m
 
 .gallery-item::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.2s; z-index: 1; }
 .gallery-item:hover::after { opacity: 0.7; }
-/* Hover Colors */
 .gallery-item:nth-child(1)::after { background-color: #C83A6C; }
 .gallery-item:nth-child(2)::after { background-color: #64A2AC; }
 .gallery-item:nth-child(3)::after { background-color: #8C1C13; }
@@ -73,12 +79,29 @@ header { display: flex; justify-content: space-between; align-items: flex-end; m
 #page-counter { color: #DA588C; font-weight: 700; margin-top: 16px; letter-spacing: 2px; }
 
 /* - NAV - */
-.main-nav a { margin-left: 24px; text-transform: uppercase; text-decoration: none; color: #000; transition: color 0.2s; }
+.main-nav a { margin-left: 24px; text-transform: uppercase; text-decoration: none; color: #000; transition: color 0.2s; font-size: 16px; }
 .main-nav a:hover { color: #DA588C; }
 .main-nav a.active { font-weight: 700; }
 
+/* - MOBILE - */
 @media (max-width: 1150px) {
     .site-wrapper { padding: 32px; }
-    header { flex-direction: column; align-items: center; gap: 32px; }
+    header { 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center;
+        gap: 32px; 
+        margin-bottom: 64px;
+    }
+    .main-logo { 
+        width: 100%; 
+        max-width: 320px; /* Limits size on mobile so it doesn't overflow */
+    }
+    .main-nav { 
+        display: flex; 
+        justify-content: center; 
+        width: 100%;
+        margin-left: -24px; /* Counteracts the margin-left on the first link for perfect centering */
+    }
     .gallery-grid { grid-template-columns: 1fr; }
 }

@@ -1,11 +1,9 @@
 $(document).ready(function() {
-    console.log("PORTFOLIO LOGIC LOADED");
+    console.log("READY");
 
-    /* - 1. BACKGROUND CYCLER - */
+    /* - 1. BACKGROUND TOGGLE - */
     let currentBg = 1;
     const totalBgs = 6;
-    // Paths are relative to index.html
-    const bgList = ['images/bg1.avif', 'images/bg2.avif', 'images/bg3.avif', 'images/bg4.avif', 'images/bg5.avif', 'images/bg6.avif'];
 
     $('.magic-trigger').on('mouseenter', function() {
         let nextBg = (currentBg % totalBgs) + 1;
@@ -14,9 +12,8 @@ $(document).ready(function() {
         currentBg = nextBg;
     });
 
-    /* - 2. LIGHTBOX SEAMLESS SLIDER - */
+    /* - 2. LIGHTBOX SLIDER - */
     const $items = $('.gallery-item');
-    let pIndex = 0;
     let images = [];
     let sIndex = 0;
 
@@ -30,7 +27,6 @@ $(document).ready(function() {
     }
 
     $items.on('click', function() {
-        pIndex = $items.index(this);
         const data = $(this).attr('data-src');
         images = data.split(',').map(s => s.trim());
         sIndex = 0;
