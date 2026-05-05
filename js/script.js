@@ -1,9 +1,11 @@
 $(document).ready(function() {
-    console.log("READY");
+    console.log("PORTFOLIO LOGIC LOADED");
 
-    /* - 1. BACKGROUND TOGGLE - */
+    /* - 1. BACKGROUND CYCLER - */
     let currentBg = 1;
     const totalBgs = 6;
+    // Paths are relative to index.html
+    const bgList = ['images/bg1.avif', 'images/bg2.avif', 'images/bg3.avif', 'images/bg4.avif', 'images/bg5.avif', 'images/bg6.avif'];
 
     $('.magic-trigger').on('mouseenter', function() {
         let nextBg = (currentBg % totalBgs) + 1;
@@ -12,7 +14,7 @@ $(document).ready(function() {
         currentBg = nextBg;
     });
 
-    /* - 2. LIGHTBOX - */
+    /* - 2. LIGHTBOX SEAMLESS SLIDER - */
     const $items = $('.gallery-item');
     let pIndex = 0;
     let images = [];
@@ -20,7 +22,11 @@ $(document).ready(function() {
 
     function update() {
         $('#lightbox-img').attr('src', images[sIndex]);
-        $('#page-counter').text(`${sIndex + 1} / ${images.length}`);
+        if (images.length > 1) {
+            $('#page-counter').text(`${sIndex + 1} / ${images.length}`).show();
+        } else {
+            $('#page-counter').hide();
+        }
     }
 
     $items.on('click', function() {
@@ -28,15 +34,36 @@ $(document).ready(function() {
         const data = $(this).attr('data-src');
         images = data.split(',').map(s => s.trim());
         sIndex = 0;
+        
         $('#project-title').text($(this).attr('data-title'));
         $('#project-desc').text($(this).attr('data-desc'));
         update();
         $('#lightbox').fadeIn(200).css('display', 'flex');
     });
 
+    $('.next-btn, #lightbox-img').on('click', function(e) {
+        e.stopPropagation();
+        sIndex = (sIndex + 1) % images.length;
+        update();
+    });
+
+    $('.prev-btn').on('click', function(e) {
+        e.stopPropagation();
+        sIndex = (sIndex - 1 + images.length) % images.length;
+        update();
+    });
+
     $('.close-btn, #lightbox').on('click', function(e) {
         if ($(e.target).is('#lightbox') || $(e.target).is('.close-btn')) {
             $('#lightbox').fadeOut(200);
+        }
+    });
+
+    $(document).on('keydown', function(e) {
+        if ($('#lightbox').is(':visible')) {
+            if (e.which === 37) $('.prev-btn').click();
+            if (e.which === 39) $('.next-btn').click();
+            if (e.which === 27) $('.close-btn').click();
         }
     });
 });
