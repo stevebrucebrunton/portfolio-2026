@@ -2,7 +2,7 @@ $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
     /* - 1. BACKGROUND CYCLER & IMAGE PRELOADER - */
-    const bgList = ['images/bg1.png', 'images/bg2.png', 'images/bg3.png', 'images/bg4.png', 'images/bg5.png', 'images/bg6.png'];
+    const bgList = ['images/bg1.avif', 'images/bg2.avif', 'images/bg3.avif', 'images/bg4.avif', 'images/bg5.avif', 'images/bg6.avif'];
     $(bgList).each(function() { $('<img/>')[0].src = this; });
 
     let galleryImagesToPreload = [];
