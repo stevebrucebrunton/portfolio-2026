@@ -50,7 +50,7 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
     background-size: cover; background-position: center; background-repeat: no-repeat;
     transition: opacity 0.2s ease-in-out; 
 }
-.bg-1 { background-image: url('../images/bg1.png'); z-index: -100; }
+.bg-1 { background-image: url('../images/bg1.avif'); z-index: -100; }
 .bg-2 { z-index: -99; }
 
 .site-wrapper { position: relative; z-index: 10; width: var(--container-width); max-width: 100%; margin: 0 auto; background-color: var(--white); padding: var(--space-xl); box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; }
