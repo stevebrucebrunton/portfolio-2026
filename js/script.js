@@ -2,21 +2,17 @@ $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
     /* - 1. BACKGROUND CYCLER - */
-    // Simpler cycler using the 6 layers pre-rendered in HTML
     let currentBgIndex = 1;
     const totalBgs = 6;
 
     $('.magic-trigger').on('mouseenter', function() {
         let nextBgIndex = (currentBgIndex % totalBgs) + 1;
-        
-        // Instantly swap opacity of the pre-loaded layers
         $(`.bg-${currentBgIndex}`).css('opacity', 0);
         $(`.bg-${nextBgIndex}`).css('opacity', 1);
-        
         currentBgIndex = nextBgIndex;
     });
 
-    /* - GALLERY IMAGE PRELOADER (Left completely untouched) - */
+    /* - GALLERY IMAGE PRELOADER - */
     let galleryImagesToPreload = [];
     $('.gallery-item').each(function() {
         const srcs = $(this).attr('data-src').split(',');
@@ -26,7 +22,7 @@ $(document).ready(function() {
         $('<img/>')[0].src = this; 
     });
 
-    /* - 2. LIGHTBOX SEAMLESS SLIDER (Left completely untouched) - */
+    /* - 2. LIGHTBOX SEAMLESS SLIDER - */
     const $galleryItems = $('.gallery-item');
     let currentProjectIndex = 0;
     let currentImages = []; 
@@ -101,19 +97,31 @@ $(document).ready(function() {
         }
     });
 
-    /* - 3. CONTACT FORM SUBMISSION (Left completely untouched) - */
+    /* - 3. CONTACT FORM SUBMISSION (UPDATED FOR FORMSUBMIT) - */
     $('#contact-form').on('submit', function(e) {
         e.preventDefault(); 
         const $form = $(this);
         const $message = $('#success-message');
+        const $submitBtn = $form.find('.submit-btn');
+        
+        // Prevent double clicking while sending
+        $submitBtn.prop('disabled', true).text('SENDING...');
         
         $.ajax({
-            type: "POST",
-            url: "/",
-            data: $form.serialize() + "&form-name=contact",
+            method: "POST",
+            url: "https://formsubmit.co/ajax/stevebrucebrunton@gmail.com",
+            dataType: "json",
+            accepts: "application/json",
+            data: {
+                name: $('#name').val(),
+                email: $('#email').val(),
+                message: $('#message').val(),
+                _subject: "New Message via SteveBrunton.com"
+            },
             success: function() {
                 $form.fadeOut(300, function() {
                     $message.fadeIn(300);
+                    $submitBtn.prop('disabled', false).text('SEND');
                     setTimeout(function() {
                         $message.fadeOut(300, function() { 
                             $form[0].reset(); 
@@ -124,6 +132,7 @@ $(document).ready(function() {
             },
             error: function() {
                 alert("Oops! There was a problem submitting your form. Please try again.");
+                $submitBtn.prop('disabled', false).text('SEND');
             }
         });
     });
