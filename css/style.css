@@ -39,7 +39,6 @@
 
 /* - 2. GLOBAL STYLES - */
 html { overflow-y: scroll; }
-/* Reverted background-color back to var(--white) to fix the black bars! */
 body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 p { font-size: 16px; font-weight: 400; margin-bottom: var(--space-l); }
@@ -80,20 +79,17 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 .main-nav a:active { color: var(--red) !important; }
 .main-nav a.active { font-weight: 400; }
 
-/* - 4. GALLERY GRID (UPDATED FOR SYNCHRONIZED LOADING) - */
+/* - 4. GALLERY GRID (UPDATED FOR INSTANT RAW SNAP) - */
 .gallery-grid { 
     display: grid; 
     grid-template-columns: repeat(2, var(--thumb-width)); 
     gap: var(--grid-gap); 
     justify-content: center; 
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    visibility: hidden; /* Hides the grid while JS preloads the thumbnails */
 }
 
 .gallery-grid.loaded {
-    opacity: 1;
-    transform: translateY(0);
+    visibility: visible; /* Snaps into existence instantly with zero animation */
 }
 
 .gallery-item { position: relative; width: var(--thumb-width); height: var(--thumb-height); background-color: var(--light-grey); background-size: cover; background-position: center; cursor: pointer; }
