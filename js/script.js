@@ -2,17 +2,21 @@ $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
     /* - 1. TRAFFIC CONTROLLER: VIP PRELOAD & GRID REVEAL - */
+    // Preload next backgrounds for instant hover
     $('<img/>')[0].src = 'images/bg2.avif';
     $('<img/>')[0].src = 'images/bg3.avif';
 
     const $grid = $('.gallery-grid');
-    let thumbnails = [];
+    
+    // We create a master list of essential media. 
+    // We force the script to wait for the main background FIRST.
+    let essentialMedia = ['images/bg1.avif']; 
     
     $('.gallery-item').each(function() {
         let bgUrl = $(this).css('background-image');
         bgUrl = bgUrl.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
         if (bgUrl && bgUrl !== 'none') {
-            thumbnails.push(bgUrl);
+            essentialMedia.push(bgUrl);
         }
     });
 
@@ -21,19 +25,21 @@ $(document).ready(function() {
         preloadHeavyMedia(); 
     }
 
-    if (thumbnails.length > 0) {
+    if (essentialMedia.length > 0) {
         let loadedCount = 0;
-        $.each(thumbnails, function(i, src) {
+        $.each(essentialMedia, function(i, src) {
             let img = new Image();
+            // This waits for both the thumbnails AND bg1 to finish
             img.onload = img.onerror = function() {
                 loadedCount++;
-                if (loadedCount === thumbnails.length) {
+                if (loadedCount === essentialMedia.length) {
                     revealGrid();
                 }
             };
             img.src = src;
         });
         
+        // Failsafe: if the network drops out, force it to show after 2.5 seconds anyway
         setTimeout(function() {
             if (!$grid.hasClass('loaded')) revealGrid();
         }, 2500);
