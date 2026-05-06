@@ -97,27 +97,23 @@ $(document).ready(function() {
         }
     });
 
-    /* - 3. CONTACT FORM SUBMISSION (UPDATED FOR FORMSUBMIT) - */
+    /* - 3. CONTACT FORM SUBMISSION (SEAMLESS AJAX METHOD) - */
     $('#contact-form').on('submit', function(e) {
         e.preventDefault(); 
         const $form = $(this);
         const $message = $('#success-message');
         const $submitBtn = $form.find('.submit-btn');
         
-        // Prevent double clicking while sending
         $submitBtn.prop('disabled', true).text('SENDING...');
         
         $.ajax({
             method: "POST",
+            // Uses FormSubmit's specific AJAX endpoint
             url: "https://formsubmit.co/ajax/stevebrucebrunton@gmail.com",
             dataType: "json",
             accepts: "application/json",
-            data: {
-                name: $('#name').val(),
-                email: $('#email').val(),
-                message: $('#message').val(),
-                _subject: "New Message via SteveBrunton.com"
-            },
+            // Serializes all your inputs, including the hidden ones
+            data: $form.serialize(),
             success: function() {
                 $form.fadeOut(300, function() {
                     $message.fadeIn(300);
@@ -130,8 +126,10 @@ $(document).ready(function() {
                     }, 3000); 
                 });
             },
-            error: function() {
-                alert("Oops! There was a problem submitting your form. Please try again.");
+            error: function(err) {
+                // Modified error message so you know to check your email on the first try
+                alert("If this is your first test, please check your email to activate the form! Otherwise, something went wrong.");
+                console.log(err);
                 $submitBtn.prop('disabled', false).text('SEND');
             }
         });

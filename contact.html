@@ -58,11 +58,11 @@
         </header>
         <main>
             <section class="contact-section">
-                <!-- 1. THE FORM (UPDATED FOR FORMSUBMIT) -->
-                <form id="contact-form" class="contact-form" action="https://formsubmit.co/stevebrucebrunton@gmail.com" method="POST">
+                <!-- 1. THE FORM (CLEANED UP FOR AJAX) -->
+                <form id="contact-form" class="contact-form" method="POST">
                     <!-- Invisible Honeypot to catch spambots -->
                     <input type="text" name="_honey" style="display:none">
-                    <!-- Disables their default captcha page since we are using your custom AJAX success message -->
+                    <!-- Disables the captcha page -->
                     <input type="hidden" name="_captcha" value="false">
                     <!-- Sets the email subject line automatically -->
                     <input type="hidden" name="_subject" value="New message from SteveBrunton.com">
