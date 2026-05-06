@@ -1,20 +1,6 @@
 $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
-    /* - 0. MASTER FADE-IN (PREVENTS FLASHING) - */
-    // Waits for the heavy bg1 to decode, then crossfades the entire page in
-    let heroBg = new Image();
-    heroBg.src = 'images/bg1.avif';
-    if (heroBg.complete) {
-        $('body').addClass('ready');
-    } else {
-        heroBg.onload = heroBg.onerror = function() {
-            $('body').addClass('ready');
-        };
-    }
-    // Failsafe: never leave the user staring at a blank screen for more than 1.5 seconds
-    setTimeout(function() { $('body').addClass('ready'); }, 1500);
-
     /* - 1. TRAFFIC CONTROLLER: VIP PRELOAD & GRID REVEAL - */
     $('<img/>')[0].src = 'images/bg2.avif';
     $('<img/>')[0].src = 'images/bg3.avif';
