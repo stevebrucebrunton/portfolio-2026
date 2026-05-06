@@ -1,15 +1,27 @@
 $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
+    /* - 0. MASTER FADE-IN (PREVENTS FLASHING) - */
+    // Waits for the heavy bg1 to decode, then crossfades the entire page in
+    let heroBg = new Image();
+    heroBg.src = 'images/bg1.avif';
+    if (heroBg.complete) {
+        $('body').addClass('ready');
+    } else {
+        heroBg.onload = heroBg.onerror = function() {
+            $('body').addClass('ready');
+        };
+    }
+    // Failsafe: never leave the user staring at a blank screen for more than 1.5 seconds
+    setTimeout(function() { $('body').addClass('ready'); }, 1500);
+
     /* - 1. TRAFFIC CONTROLLER: VIP PRELOAD & GRID REVEAL - */
-    // Instantly preload the very next two backgrounds so immediate hovering is seamless
     $('<img/>')[0].src = 'images/bg2.avif';
     $('<img/>')[0].src = 'images/bg3.avif';
 
     const $grid = $('.gallery-grid');
     let thumbnails = [];
     
-    // Extract thumbnail URLs from the inline CSS backgrounds
     $('.gallery-item').each(function() {
         let bgUrl = $(this).css('background-image');
         bgUrl = bgUrl.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
@@ -20,7 +32,7 @@ $(document).ready(function() {
 
     function revealGrid() {
         $grid.addClass('loaded');
-        preloadHeavyMedia(); // Fire the heavy stuff ONLY after grid is visible
+        preloadHeavyMedia(); 
     }
 
     if (thumbnails.length > 0) {
@@ -30,13 +42,12 @@ $(document).ready(function() {
             img.onload = img.onerror = function() {
                 loadedCount++;
                 if (loadedCount === thumbnails.length) {
-                    revealGrid(); // Snap them all onto the screen at once
+                    revealGrid();
                 }
             };
             img.src = src;
         });
         
-        // Failsafe: if a connection lags for more than 2.5 seconds, force the reveal anyway
         setTimeout(function() {
             if (!$grid.hasClass('loaded')) revealGrid();
         }, 2500);
@@ -44,9 +55,8 @@ $(document).ready(function() {
         revealGrid();
     }
 
-    /* - 2. HEAVY MEDIA PRELOADER (Deferred until thumbnails are loaded) - */
+    /* - 2. HEAVY MEDIA PRELOADER - */
     function preloadHeavyMedia() {
-        // bg2 and bg3 are already loaded, so we just grab the rest
         const remainingBgs = [
             'images/bg4.avif', 
             'images/bg5.avif', 
@@ -150,7 +160,7 @@ $(document).ready(function() {
         }
     });
 
-    /* - 5. CONTACT FORM SUBMISSION (SEAMLESS AJAX METHOD) - */
+    /* - 5. CONTACT FORM SUBMISSION - */
     $('#contact-form').on('submit', function(e) {
         e.preventDefault(); 
         const $form = $(this);

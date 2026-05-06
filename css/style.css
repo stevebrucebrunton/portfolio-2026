@@ -39,7 +39,8 @@
 
 /* - 2. GLOBAL STYLES - */
 html { overflow-y: scroll; }
-body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--black); -webkit-font-smoothing: antialiased; }
+/* Reverted background-color back to var(--white) to fix the black bars! */
+body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 p { font-size: 16px; font-weight: 400; margin-bottom: var(--space-l); }
 a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: var(--black); transition: color 0.2s; }
@@ -85,13 +86,11 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     grid-template-columns: repeat(2, var(--thumb-width)); 
     gap: var(--grid-gap); 
     justify-content: center; 
-    /* Hide grid by default to prevent drip-loading */
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-/* This class is added by JS once ALL 8 thumbnails are fully buffered */
 .gallery-grid.loaded {
     opacity: 1;
     transform: translateY(0);

@@ -6,22 +6,23 @@
     <title>Contact | Steve Brunton</title>
     <meta name="description" content="Get in touch with Steve Brunton for freelance and full-time graphic design inquiries in Toronto.">
     
-    <!-- Open Graph Tags -->
     <meta property="og:title" content="Contact | Steve Brunton">
     <meta property="og:description" content="Get in touch with Steve Brunton for freelance and full-time graphic design inquiries in Toronto.">
     <meta property="og:image" content="https://www.stevebrunton.com/images/headshot.png">
     <meta property="og:url" content="https://www.stevebrunton.com/contact.html">
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
-    
-    <!-- VIP Fast-Pass to instantly load the first background and kill the black flash -->
     <link rel="preload" as="image" href="images/bg1.avif">
-    
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- MASTER FADE-IN -->
+    <style>
+        body { opacity: 0; transition: opacity 0.5s ease-in-out; background-color: #ffffff; }
+        body.ready { opacity: 1; }
+    </style>
+    <noscript><style>body { opacity: 1; }</style></noscript>
 </head>
 <body>
-    <!-- ALL 6 LAYERS PRE-LOADED IN HTML -->
     <div class="bg-layer bg-1" style="opacity: 1;"></div>
     <div class="bg-layer bg-2" style="opacity: 0;"></div>
     <div class="bg-layer bg-3" style="opacity: 0;"></div>
@@ -62,13 +63,9 @@
         </header>
         <main>
             <section class="contact-section">
-                <!-- 1. THE FORM (CLEANED UP FOR AJAX) -->
                 <form id="contact-form" class="contact-form" method="POST">
-                    <!-- Invisible Honeypot to catch spambots -->
                     <input type="text" name="_honey" style="display:none">
-                    <!-- Disables the captcha page -->
                     <input type="hidden" name="_captcha" value="false">
-                    <!-- Sets the email subject line automatically -->
                     <input type="hidden" name="_subject" value="New message from SteveBrunton.com">
 
                     <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
@@ -77,7 +74,6 @@
                     <button type="submit" class="submit-btn">Send</button>
                 </form>
 
-                <!-- 2. THE SUCCESS MESSAGE -->
                 <div id="success-message" style="display:none;">
                     <h3>Sent</h3>
                 </div>

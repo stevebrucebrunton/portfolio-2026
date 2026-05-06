@@ -15,10 +15,17 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     
-    <!-- VIP Fast-Pass to instantly load the first background and kill the black flash -->
+    <!-- VIP Fast-Pass -->
     <link rel="preload" as="image" href="images/bg1.avif">
     
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- MASTER FADE-IN: Prevents the unstyled background flash -->
+    <style>
+        body { opacity: 0; transition: opacity 0.5s ease-in-out; background-color: #ffffff; }
+        body.ready { opacity: 1; }
+    </style>
+    <noscript><style>body { opacity: 1; }</style></noscript>
 </head>
 <body>
     <!-- ALL 6 LAYERS PRE-LOADED IN HTML -->
@@ -79,20 +86,14 @@
     <!-- LIGHTBOX HTML -->
     <div id="lightbox" class="lightbox-container" role="dialog" aria-modal="true">
         <span class="close-btn" tabindex="0" role="button" aria-label="Close Project Viewer">&times;</span>
-        
-        <!-- NAVIGATION ARROWS -->
         <span class="nav-btn prev-btn" tabindex="0" role="button" aria-label="Previous Project">&#10094;</span>
         <span class="nav-btn next-btn" tabindex="0" role="button" aria-label="Next Project">&#10095;</span>
-        
         <div class="lightbox-content">
             <div class="project-text">
                 <h3 id="project-title"></h3>
                 <p id="project-desc"></p>
             </div>
-            
             <img id="lightbox-img" src="images/mr1.avif" alt="Detailed view">
-            
-            <!-- PAGE COUNTER -->
             <div id="page-counter"></div>
         </div>
     </div>

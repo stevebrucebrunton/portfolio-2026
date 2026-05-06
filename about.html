@@ -6,22 +6,23 @@
     <title>About | Steve Brunton</title>
     <meta name="description" content="Learn about Steve Brunton, a Toronto-based graphic designer.">
     
-    <!-- Open Graph Tags -->
     <meta property="og:title" content="About | Steve Brunton">
     <meta property="og:description" content="Learn about Steve Brunton, a Toronto-based graphic designer.">
     <meta property="og:image" content="https://www.stevebrunton.com/images/headshot.png">
     <meta property="og:url" content="https://www.stevebrunton.com/about.html">
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
-    
-    <!-- VIP Fast-Pass to instantly load the first background and kill the black flash -->
     <link rel="preload" as="image" href="images/bg1.avif">
-    
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- MASTER FADE-IN -->
+    <style>
+        body { opacity: 0; transition: opacity 0.5s ease-in-out; background-color: #ffffff; }
+        body.ready { opacity: 1; }
+    </style>
+    <noscript><style>body { opacity: 1; }</style></noscript>
 </head>
 <body>
-    <!-- ALL 6 LAYERS PRE-LOADED IN HTML -->
     <div class="bg-layer bg-1" style="opacity: 1;"></div>
     <div class="bg-layer bg-2" style="opacity: 0;"></div>
     <div class="bg-layer bg-3" style="opacity: 0;"></div>
