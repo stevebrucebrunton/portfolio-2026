@@ -79,8 +79,24 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 .main-nav a:active { color: var(--red) !important; }
 .main-nav a.active { font-weight: 400; }
 
-/* - 4. GALLERY GRID - */
-.gallery-grid { display: grid; grid-template-columns: repeat(2, var(--thumb-width)); gap: var(--grid-gap); justify-content: center; }
+/* - 4. GALLERY GRID (UPDATED FOR SYNCHRONIZED LOADING) - */
+.gallery-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, var(--thumb-width)); 
+    gap: var(--grid-gap); 
+    justify-content: center; 
+    /* Hide grid by default to prevent drip-loading */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* This class is added by JS once ALL 8 thumbnails are fully buffered */
+.gallery-grid.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .gallery-item { position: relative; width: var(--thumb-width); height: var(--thumb-height); background-color: var(--light-grey); background-size: cover; background-position: center; cursor: pointer; }
 .gallery-item::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.2s; z-index: 1; }
 
@@ -104,12 +120,11 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
 .desktop-br { display: inline; }
 
-/* - 6. CONTACT PAGE (UPDATED CENTERING) - */
+/* - 6. CONTACT PAGE - */
 .contact-section { 
     max-width: 600px; 
     margin: 0 auto; 
     text-align: center;
-    /* Centers the 'Sent' message within the footprint */
     min-height: 480px; 
     display: flex;
     flex-direction: column;

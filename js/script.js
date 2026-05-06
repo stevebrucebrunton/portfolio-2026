@@ -1,7 +1,70 @@
 $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
-    /* - 1. BACKGROUND CYCLER - */
+    /* - 1. TRAFFIC CONTROLLER: VIP PRELOAD & GRID REVEAL - */
+    // Instantly preload the very next two backgrounds so immediate hovering is seamless
+    $('<img/>')[0].src = 'images/bg2.avif';
+    $('<img/>')[0].src = 'images/bg3.avif';
+
+    const $grid = $('.gallery-grid');
+    let thumbnails = [];
+    
+    // Extract thumbnail URLs from the inline CSS backgrounds
+    $('.gallery-item').each(function() {
+        let bgUrl = $(this).css('background-image');
+        bgUrl = bgUrl.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        if (bgUrl && bgUrl !== 'none') {
+            thumbnails.push(bgUrl);
+        }
+    });
+
+    function revealGrid() {
+        $grid.addClass('loaded');
+        preloadHeavyMedia(); // Fire the heavy stuff ONLY after grid is visible
+    }
+
+    if (thumbnails.length > 0) {
+        let loadedCount = 0;
+        $.each(thumbnails, function(i, src) {
+            let img = new Image();
+            img.onload = img.onerror = function() {
+                loadedCount++;
+                if (loadedCount === thumbnails.length) {
+                    revealGrid(); // Snap them all onto the screen at once
+                }
+            };
+            img.src = src;
+        });
+        
+        // Failsafe: if a connection lags for more than 2.5 seconds, force the reveal anyway
+        setTimeout(function() {
+            if (!$grid.hasClass('loaded')) revealGrid();
+        }, 2500);
+    } else {
+        revealGrid();
+    }
+
+    /* - 2. HEAVY MEDIA PRELOADER (Deferred until thumbnails are loaded) - */
+    function preloadHeavyMedia() {
+        // bg2 and bg3 are already loaded, so we just grab the rest
+        const remainingBgs = [
+            'images/bg4.avif', 
+            'images/bg5.avif', 
+            'images/bg6.avif'
+        ];
+        $(remainingBgs).each(function() { $('<img/>')[0].src = this; });
+
+        let galleryImagesToPreload = [];
+        $('.gallery-item').each(function() {
+            const srcs = $(this).attr('data-src').split(',');
+            srcs.forEach(src => galleryImagesToPreload.push(src.trim()));
+        });
+        $(galleryImagesToPreload).each(function() { 
+            $('<img/>')[0].src = this; 
+        });
+    }
+
+    /* - 3. BACKGROUND CYCLER - */
     let currentBgIndex = 1;
     const totalBgs = 6;
 
@@ -12,17 +75,7 @@ $(document).ready(function() {
         currentBgIndex = nextBgIndex;
     });
 
-    /* - GALLERY IMAGE PRELOADER - */
-    let galleryImagesToPreload = [];
-    $('.gallery-item').each(function() {
-        const srcs = $(this).attr('data-src').split(',');
-        srcs.forEach(src => galleryImagesToPreload.push(src.trim()));
-    });
-    $(galleryImagesToPreload).each(function() { 
-        $('<img/>')[0].src = this; 
-    });
-
-    /* - 2. LIGHTBOX SEAMLESS SLIDER - */
+    /* - 4. LIGHTBOX SEAMLESS SLIDER - */
     const $galleryItems = $('.gallery-item');
     let currentProjectIndex = 0;
     let currentImages = []; 
@@ -97,7 +150,7 @@ $(document).ready(function() {
         }
     });
 
-    /* - 3. CONTACT FORM SUBMISSION (SEAMLESS AJAX METHOD) - */
+    /* - 5. CONTACT FORM SUBMISSION (SEAMLESS AJAX METHOD) - */
     $('#contact-form').on('submit', function(e) {
         e.preventDefault(); 
         const $form = $(this);
@@ -108,11 +161,9 @@ $(document).ready(function() {
         
         $.ajax({
             method: "POST",
-            // Uses FormSubmit's specific AJAX endpoint
             url: "https://formsubmit.co/ajax/stevebrucebrunton@gmail.com",
             dataType: "json",
             accepts: "application/json",
-            // Serializes all your inputs, including the hidden ones
             data: $form.serialize(),
             success: function() {
                 $form.fadeOut(300, function() {
@@ -127,7 +178,6 @@ $(document).ready(function() {
                 });
             },
             error: function(err) {
-                // Modified error message so you know to check your email on the first try
                 alert("If this is your first test, please check your email to activate the form! Otherwise, something went wrong.");
                 console.log(err);
                 $submitBtn.prop('disabled', false).text('SEND');
