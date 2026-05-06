@@ -1,8 +1,8 @@
 /* - 0. FONT FAMILY - */
-@font-face { font-family: 'Cy'; src: url('../fonts/Cy-Thin.ttf') format('truetype'); font-weight: 100; }
-@font-face { font-family: 'Cy'; src: url('../fonts/Cy-Regular.ttf') format('truetype'); font-weight: 400; }
-@font-face { font-family: 'Cy'; src: url('../fonts/Cy-Bold.ttf') format('truetype'); font-weight: 700; }
-@font-face { font-family: 'Cy'; src: url('../fonts/Cy-Black.ttf') format('truetype'); font-weight: 900; }
+@font-face { font-family: 'Cy'; src: url('../fonts/cy-thin.ttf') format('truetype'); font-weight: 100; }
+@font-face { font-family: 'Cy'; src: url('../fonts/cy-regular.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Cy'; src: url('../fonts/cy-bold.ttf') format('truetype'); font-weight: 700; }
+@font-face { font-family: 'Cy'; src: url('../fonts/cy-black.ttf') format('truetype'); font-weight: 900; }
 
 /* - 1. DESIGN SYSTEM / TOKENS - */
 :root {
@@ -39,7 +39,7 @@
 
 /* - 2. GLOBAL STYLES - */
 html { overflow-y: scroll; }
-/* Changed background-color from var(--white) to var(--black) to kill the flash on wide screens */
+/* Using var(--black) to kill the flash on wide screens */
 body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--black); -webkit-font-smoothing: antialiased; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 p { font-size: 16px; font-weight: 400; margin-bottom: var(--space-l); }
@@ -50,7 +50,7 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-size: cover; background-position: center; background-repeat: no-repeat;
     transition: opacity 0.2s ease-in-out; 
-    z-index: -100; /* Kept your exact z-index approach */
+    z-index: -100;
 }
 
 /* Hardcoded to prevent CSS lookup delay */
