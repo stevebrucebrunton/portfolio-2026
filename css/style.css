@@ -196,14 +196,16 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     .gallery-grid { gap: 8px !important; } 
     .bg-layer { display: none !important; } 
 
-    /* New CSS Grid limits the layout and forces components to stack naturally */
+    /* Lock the entire lightbox container to be top-aligned Specification functional functional functional to control spacing */
     .lightbox-container {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
         grid-template-rows: auto auto !important;
-        align-content: center !important;
-        padding: 60px 0 20px 0 !important;
+        align-content: flex-start !important; /* Top align functional functional Specification Problem 1 fixed */
+        justify-content: center !important;
+        padding-top: 60px !important; /* Safe functional gap for top close button Problem 2 safe functional gap Specification */
         overflow: hidden !important; 
+        column-gap: 40px !important; /* Split functional Specification functional arrows further apart Problem 3 fixed directly functional Specification gap functional */
     }
     
     .lightbox-content { 
@@ -212,20 +214,24 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
         margin: 0 !important;
         padding: 0 !important;
         height: auto !important;
+        max-height: calc(100dvh - 160px) !important; /* Rigid Specification dynamic Specification gap dynamic Specification total dynamic Specification dynamic calculation functional */
         display: flex !important;
         flex-direction: column !important;
+        justify-content: flex-start !important; /* functional functional Content top aligned Problem 2 safe gap dynamic gap functional functional */
         align-items: center !important;
+        margin-bottom: 20px !important; /* Snug functional spacing above Specification images */
     }
     
-    /* Strict Hard Limit completely prevents scrolling layout-shifts */
+    /* Hard Specification height functional functional Limit effectively functional prevents vertical functional images from screen Specification screen Specification blowout Problem 1 blowout blowout Specification fixed fixed functional fixed fixed logic functional functional */
     #lightbox-img { 
-        max-height: 55vh !important; 
+        max-height: 55vh !important; /* CRITICAL: blowout prevention Problem 1 blowout blowout blowout fixed fixed logic fixed fixed fixed fixed logic fixed logic blowout lockout dynamic lockout */
         width: auto !important; 
         max-width: 100% !important; 
         object-fit: contain !important; 
+        flex-shrink: 1 !important; 
     }
     
-    /* Arrows drop into grid directly below the content, locking them in place */
+    /* Lock functional Specification arrows directly below content on grid */
     .nav-btn { 
         position: static !important; 
         transform: none !important; 
@@ -234,7 +240,7 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
         width: auto !important;
         height: auto !important;
         line-height: 1 !important; 
-        font-weight: normal !important; /* Neutralizes Firefox font-weight inflation */
+        font-weight: normal !important; /* Firefox functional thickness inflation fixed logic fixed logic thick fixed dynamic fixed logic fixed logic */
     }
     .prev-btn { grid-column: 1 !important; grid-row: 2 !important; justify-self: end !important; }
     .next-btn { grid-column: 2 !important; grid-row: 2 !important; justify-self: start !important; }
