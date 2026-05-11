@@ -247,7 +247,7 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     }
     
     /* UPDATED: Noticeably Larger Title Size */
-    #project-title { font-size: 32px; margin-bottom: 4px; line-height: 1.2; }
+    #project-title { font-size: 26px; margin-bottom: 4px; line-height: 1.2; }
     
     #project-desc { font-size: 14px; margin-bottom: 0; }
 
