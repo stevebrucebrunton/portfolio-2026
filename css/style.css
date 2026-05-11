@@ -38,7 +38,6 @@
 }
 
 /* - 2. GLOBAL STYLES - */
-/* UPDATED: The Nuclear Horizontal Lock prevents Firefox from breaking the layout width */
 html, body { overflow-x: hidden; width: 100%; }
 html { overflow-y: scroll; }
 body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; }
@@ -61,13 +60,11 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
 .bg-5 { background-image: url('../images/bg5.avif'); z-index: -102; }
 .bg-6 { background-image: url('../images/bg6.avif'); z-index: -101; }
 
-/* UPDATED: max-width changed to 100vw to ensure it respects viewport rules across all browsers */
 .site-wrapper { position: relative; z-index: 10; width: var(--container-width); max-width: 100vw; margin: 0 auto; background-color: var(--white); padding: var(--space-xl); box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; }
 
 header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xxl); }
 main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
-/* UPDATED: Added box-sizing to enforce strict boundaries on Firefox */
 .logo-container { position: relative; display: inline-block; width: 100%; max-width: 448px; box-sizing: border-box; }
 .main-logo { display: block; width: 100%; height: auto; max-width: 100%; }
 .logo-hover-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; cursor: default; }
@@ -198,4 +195,17 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     header { gap: 24px; margin-bottom: 48px; }
     .gallery-grid { gap: 8px; } 
     .bg-layer { display: none !important; } 
+
+    /* Mobile Lightbox Overrides */
+    .lightbox-content { max-width: 100%; padding: 0 16px; box-sizing: border-box; }
+    #lightbox-img { max-height: 55vh; width: 100%; object-fit: contain; }
+    
+    .nav-btn { font-size: 32px; padding: 12px; }
+    .prev-btn { left: -8px; }
+    .next-btn { right: -8px; }
+    
+    .close-btn { font-size: 36px; top: 12px; right: 16px; }
+    .project-text { padding: 0 32px; }
+    #project-title { font-size: 22px; margin-bottom: 4px; }
+    #project-desc { font-size: 14px; margin-bottom: 8px; }
 }
