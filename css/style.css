@@ -196,62 +196,52 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     .gallery-grid { gap: 8px !important; } 
     .bg-layer { display: none !important; } 
 
-    /* Force the lightbox to NEVER scroll */
+    /* New CSS Grid limits the layout and forces components to stack naturally */
     .lightbox-container {
-        align-items: center !important; 
-        justify-content: center !important;
-        padding-top: 0 !important; 
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto !important;
+        align-content: center !important;
+        padding: 60px 0 20px 0 !important;
         overflow: hidden !important; 
     }
     
-    /* Give the content area a strict bounding box */
     .lightbox-content { 
-        max-width: 100% !important; 
-        padding: 0 !important; 
-        height: auto !important; 
-        max-height: calc(100dvh - 140px) !important; /* Subtracts space for close button (top) and arrows (bottom) */
+        grid-column: 1 / span 2 !important;
+        grid-row: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: center !important;
         align-items: center !important;
-        margin-top: 20px !important;
-        margin-bottom: 60px !important; /* Shoves the image up slightly so arrows sit underneath */
     }
     
-    /* Make the image surrender to the bounding box */
+    /* Strict Hard Limit completely prevents scrolling layout-shifts */
     #lightbox-img { 
-        max-height: 100% !important; 
-        max-width: 100% !important; 
+        max-height: 55vh !important; 
         width: auto !important; 
-        height: auto !important;
+        max-width: 100% !important; 
         object-fit: contain !important; 
-        flex-shrink: 1 !important; 
     }
     
-    /* Standardize button size to kill browser rendering differences */
+    /* Arrows drop into grid directly below the content, locking them in place */
     .nav-btn { 
-        top: auto !important; 
-        bottom: 25px !important; 
+        position: static !important; 
         transform: none !important; 
-        font-size: 28px !important; 
-        padding: 0 !important; 
-        width: 60px !important;
-        height: 60px !important;
-        line-height: 60px !important; /* Forces baseline vertically center */
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
+        font-size: 32px !important; 
+        padding: 16px 24px !important; 
+        width: auto !important;
+        height: auto !important;
+        line-height: 1 !important; 
+        font-weight: normal !important; /* Neutralizes Firefox font-weight inflation */
     }
+    .prev-btn { grid-column: 1 !important; grid-row: 2 !important; justify-self: end !important; }
+    .next-btn { grid-column: 2 !important; grid-row: 2 !important; justify-self: start !important; }
     
-    /* Lock arrows tightly together in the bottom center */
-    .prev-btn { left: calc(50% - 60px) !important; }
-    .next-btn { right: calc(50% - 60px) !important; }
-    
-    /* Text and close button sizing */
     .close-btn { font-size: 40px !important; top: 10px !important; right: 20px !important; line-height: 1 !important; }
-    .project-text { padding: 0 16px !important; margin-bottom: 12px !important; flex-shrink: 0 !important; }
+    .project-text { padding: 0 16px !important; margin-bottom: 12px !important; }
     #project-title { font-size: 20px !important; margin-bottom: 4px !important; }
     #project-desc { font-size: 14px !important; margin-bottom: 0 !important; }
-    #page-counter { flex-shrink: 0 !important; margin-top: 12px !important; }
+    #page-counter { margin-top: 12px !important; }
 }
