@@ -191,82 +191,87 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
 /* - 9. RESPONSIVENESS (PHONES) - */
 @media (max-width: 768px) {
-    .site-wrapper { padding: 16px !important; } 
-    header { gap: 24px !important; margin-bottom: 48px !important; }
-    .gallery-grid { gap: 8px !important; } 
+    .site-wrapper { padding: 16px; } 
+    header { gap: 24px; margin-bottom: 48px; }
+    .gallery-grid { gap: 8px; } 
     .bg-layer { display: none !important; } 
 
-    /* Lock the entire lightbox to prevent any scrolling */
+    /* The Ultimate Scroll Lock */
     .lightbox-container {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important; 
-        padding-top: 60px !important; /* Safe zone for the top X button */
-        height: 100dvh !important; 
-        overflow: hidden !important; 
-        box-sizing: border-box !important;
+        /* No display properties here, letting JS naturally turn it on/off */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100dvh;
+        overflow: hidden; /* Hard locks scrolling */
+        overscroll-behavior: none; /* Stops the browser UI from bouncing */
+        box-sizing: border-box;
+        padding: 0; /* Removing padding prevents math blowouts */
     }
 
-    /* Keep the close button perfectly clickable with a big tap target */
+    /* Smaller Close Button */
     .close-btn { 
-        position: absolute !important; 
-        top: 12px !important; 
-        right: 16px !important; 
-        font-size: 44px !important; 
-        line-height: 1 !important; 
-        z-index: 1010 !important;
-        padding: 8px !important; 
+        position: absolute; 
+        top: 16px; 
+        right: 20px; 
+        font-size: 32px; /* Smaller, doesn't overpower title */
+        line-height: 1; 
+        z-index: 1010;
+        padding: 8px; 
     }
 
-    /* The content area leaves room for the arrows at the bottom */
+    /* The Safe Zone for Content */
     .lightbox-content { 
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        width: 100% !important; 
-        max-width: 100% !important; 
-        height: calc(100dvh - 180px) !important; /* Forces 120px of empty space at the bottom */
-        padding: 0 16px !important; 
-        box-sizing: border-box !important;
+        position: absolute;
+        top: 60px; /* Safe space below the X */
+        bottom: 100px; /* Safe space above the arrows */
+        left: 0;
+        right: 0;
+        width: 100%; 
+        max-width: 100%;
+        max-height: none; /* Let the absolute top/bottom dictate the size */
+        padding: 0 16px; 
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Pushes text and image to the top */
+        align-items: center;
     }
-    
+
     .project-text { 
-        flex-shrink: 0 !important; /* Prevents text from squishing */
-        text-align: center !important; 
-        margin-bottom: 16px !important; 
+        flex-shrink: 0; 
+        text-align: center; 
+        margin-bottom: 16px; 
+        width: 100%;
     }
-    #project-title { font-size: 20px !important; margin-bottom: 4px !important; }
-    #project-desc { font-size: 14px !important; margin-bottom: 0 !important; }
+    #project-title { font-size: 20px; margin-bottom: 4px; }
+    #project-desc { font-size: 14px; margin-bottom: 0; }
 
-    /* The image shrinks to fit the exact space available */
+    /* The image perfectly fills the remaining space but never overflows */
     #lightbox-img { 
-        flex-grow: 1 !important; 
-        flex-shrink: 1 !important; 
-        min-height: 0 !important; /* The secret to responsive flex images */
-        max-height: 100% !important; 
-        width: auto !important; 
-        max-width: 100% !important; 
-        object-fit: contain !important; 
+        flex-grow: 1; 
+        min-height: 0; /* Magic flexbox trick to allow shrinking */
+        max-height: 100%; 
+        width: auto; 
+        max-width: 100%; 
+        object-fit: contain; 
     }
 
-    #page-counter { 
-        flex-shrink: 0 !important; 
-        margin-top: 12px !important; 
-    }
+    #page-counter { margin-top: 12px; flex-shrink: 0; }
 
-    /* Arrows placed perfectly in the bottom safe zone */
+    /* Arrows raised up, thinned out, and spread apart */
     .nav-btn { 
-        position: absolute !important; 
-        bottom: 30px !important; /* Well above the phone's bottom nav bar */
-        top: auto !important; 
-        transform: none !important; 
-        font-size: 36px !important; 
-        padding: 16px 24px !important; 
-        z-index: 1010 !important; 
-        font-weight: normal !important; /* Keeps them thin and sleek */
+        position: absolute; 
+        bottom: 40px; /* Lifted safely away from the phone's bottom nav */
+        top: auto; 
+        transform: none; 
+        font-size: 36px; 
+        padding: 16px 24px; 
+        z-index: 1010; 
+        font-weight: 300; /* Normalizes the thickness across browsers */
     }
     
-    /* Widened the gap for chubby fingers! */
-    .prev-btn { left: 15vw !important; }
-    .next-btn { right: 15vw !important; }
+    .prev-btn { left: 15vw; } /* Spread out for chubby fingers */
+    .next-btn { right: 15vw; }
 }
