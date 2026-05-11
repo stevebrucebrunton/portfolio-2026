@@ -2,14 +2,10 @@ $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
     /* - 1. TRAFFIC CONTROLLER: VIP PRELOAD & GRID REVEAL - */
-    // Preload next backgrounds for instant hover
     $('<img/>')[0].src = 'images/bg2.avif';
     $('<img/>')[0].src = 'images/bg3.avif';
 
     const $grid = $('.gallery-grid');
-    
-    // We create a master list of essential media. 
-    // We force the script to wait for the main background FIRST.
     let essentialMedia = ['images/bg1.avif']; 
     
     $('.gallery-item').each(function() {
@@ -29,7 +25,6 @@ $(document).ready(function() {
         let loadedCount = 0;
         $.each(essentialMedia, function(i, src) {
             let img = new Image();
-            // This waits for both the thumbnails AND bg1 to finish
             img.onload = img.onerror = function() {
                 loadedCount++;
                 if (loadedCount === essentialMedia.length) {
@@ -39,7 +34,6 @@ $(document).ready(function() {
             img.src = src;
         });
         
-        // Failsafe: if the network drops out, force it to show after 2.5 seconds anyway
         setTimeout(function() {
             if (!$grid.hasClass('loaded')) revealGrid();
         }, 2500);
@@ -47,14 +41,17 @@ $(document).ready(function() {
         revealGrid();
     }
 
-    /* - 2. HEAVY MEDIA PRELOADER - */
+    /* - 2. HEAVY MEDIA PRELOADER (OPTIMIZED FOR MOBILE) - */
     function preloadHeavyMedia() {
-        const remainingBgs = [
-            'images/bg4.avif', 
-            'images/bg5.avif', 
-            'images/bg6.avif'
-        ];
-        $(remainingBgs).each(function() { $('<img/>')[0].src = this; });
+        // Only burn data preloading heavy backgrounds if screen is larger than a phone
+        if ($(window).width() > 768) {
+            const remainingBgs = [
+                'images/bg4.avif', 
+                'images/bg5.avif', 
+                'images/bg6.avif'
+            ];
+            $(remainingBgs).each(function() { $('<img/>')[0].src = this; });
+        }
 
         let galleryImagesToPreload = [];
         $('.gallery-item').each(function() {
@@ -77,11 +74,18 @@ $(document).ready(function() {
         currentBgIndex = nextBgIndex;
     });
 
-    /* - 4. LIGHTBOX SEAMLESS SLIDER - */
+    /* - 4. LIGHTBOX SEAMLESS SLIDER & TOUCH SUPPORT - */
     const $galleryItems = $('.gallery-item');
     let currentProjectIndex = 0;
     let currentImages = []; 
     let currentSubIndex = 0; 
+
+    // Mobile Touch and Hold Support for Color Overlays
+    $galleryItems.on('touchstart', function() {
+        $(this).addClass('touch-active');
+    }).on('touchend touchcancel', function() {
+        $(this).removeClass('touch-active');
+    });
 
     function updateLightboxContent() {
         $('#lightbox-img').attr('src', currentImages[currentSubIndex]);

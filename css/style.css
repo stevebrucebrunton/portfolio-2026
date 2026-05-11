@@ -64,8 +64,9 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
 header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xxl); }
 main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
-.logo-container { position: relative; display: inline-block; }
-.main-logo { display: block; width: 448px; height: auto; }
+.logo-container { position: relative; display: inline-block; width: 100%; max-width: 448px; }
+/* UPDATED: width 100% prevents horizontal scroll blowout on mobile */
+.main-logo { display: block; width: 100%; height: auto; }
 .logo-hover-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; cursor: default; }
 
 .main-nav a { 
@@ -79,17 +80,17 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 .main-nav a:active { color: var(--red) !important; }
 .main-nav a.active { font-weight: 400; }
 
-/* - 4. GALLERY GRID (UPDATED FOR INSTANT RAW SNAP) - */
+/* - 4. GALLERY GRID - */
 .gallery-grid { 
     display: grid; 
     grid-template-columns: repeat(2, var(--thumb-width)); 
     gap: var(--grid-gap); 
     justify-content: center; 
-    visibility: hidden; /* Hides the grid while JS preloads the thumbnails */
+    visibility: hidden; 
 }
 
 .gallery-grid.loaded {
-    visibility: visible; /* Snaps into existence instantly with zero animation */
+    visibility: visible; 
 }
 
 .gallery-item { position: relative; width: var(--thumb-width); height: var(--thumb-height); background-color: var(--light-grey); background-size: cover; background-position: center; cursor: pointer; }
@@ -104,7 +105,9 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 .gallery-item:nth-child(7)::after { background-color: var(--Blue-500); }
 .gallery-item:nth-child(8)::after { background-color: var(--Primary-Red-900); }
 
-.gallery-item:hover::after { opacity: 0.7; }
+/* UPDATED: Added .touch-active for mobile tap-and-hold overlay */
+.gallery-item:hover::after,
+.gallery-item.touch-active::after { opacity: 0.7; }
 
 /* - 5. ABOUT PAGE - */
 .about-section { max-width: 1000px; margin: 0 auto; display: flex; align-items: flex-start; gap: var(--space-xl); text-align: left; }
@@ -174,7 +177,7 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
 .nav-btn:hover, .close-btn:hover { color: var(--pink); }
 
-/* - 8. RESPONSIVENESS - */
+/* - 8. RESPONSIVENESS (TABLETS) - */
 @media (max-width: 1150px) {
     .site-wrapper { padding: 32px; }
     header { flex-direction: column; align-items: center; gap: 32px; text-align: center; }
@@ -184,6 +187,13 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     .gallery-item { width: 100%; height: auto; aspect-ratio: 480 / 300; }
     .about-section { flex-direction: column; text-align: center; align-items: center; }
     .about-image-container { flex: 0 0 auto; margin-bottom: var(--space-xl); width: 100%; max-width: 444px; }
-    
     .desktop-br { display: none; }
+}
+
+/* - 9. RESPONSIVENESS (PHONES) - */
+@media (max-width: 768px) {
+    .site-wrapper { padding: 16px; } /* Shrinks outer whitespace */
+    header { gap: 24px; margin-bottom: 48px; }
+    .gallery-grid { gap: 8px; } /* Tighter 2x2 grid makes thumbnails physically larger */
+    .bg-layer { display: none !important; } /* Strips out backgrounds for clean white layout */
 }
