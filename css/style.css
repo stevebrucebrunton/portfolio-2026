@@ -196,52 +196,77 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     .gallery-grid { gap: 8px !important; } 
     .bg-layer { display: none !important; } 
 
-    /* New CSS Grid limits the layout and forces components to stack naturally */
+    /* Lock the entire lightbox to prevent any scrolling */
     .lightbox-container {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        grid-template-rows: auto auto !important;
-        align-content: center !important;
-        padding: 60px 0 20px 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important; 
+        padding-top: 60px !important; /* Safe zone for the top X button */
+        height: 100dvh !important; 
         overflow: hidden !important; 
+        box-sizing: border-box !important;
     }
-    
+
+    /* Keep the close button perfectly clickable with a big tap target */
+    .close-btn { 
+        position: absolute !important; 
+        top: 12px !important; 
+        right: 16px !important; 
+        font-size: 44px !important; 
+        line-height: 1 !important; 
+        z-index: 1010 !important;
+        padding: 8px !important; 
+    }
+
+    /* The content area leaves room for the arrows at the bottom */
     .lightbox-content { 
-        grid-column: 1 / span 2 !important;
-        grid-row: 1 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        height: auto !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
+        width: 100% !important; 
+        max-width: 100% !important; 
+        height: calc(100dvh - 180px) !important; /* Forces 120px of empty space at the bottom */
+        padding: 0 16px !important; 
+        box-sizing: border-box !important;
     }
     
-    /* Strict Hard Limit completely prevents scrolling layout-shifts */
+    .project-text { 
+        flex-shrink: 0 !important; /* Prevents text from squishing */
+        text-align: center !important; 
+        margin-bottom: 16px !important; 
+    }
+    #project-title { font-size: 20px !important; margin-bottom: 4px !important; }
+    #project-desc { font-size: 14px !important; margin-bottom: 0 !important; }
+
+    /* The image shrinks to fit the exact space available */
     #lightbox-img { 
-        max-height: 55vh !important; 
+        flex-grow: 1 !important; 
+        flex-shrink: 1 !important; 
+        min-height: 0 !important; /* The secret to responsive flex images */
+        max-height: 100% !important; 
         width: auto !important; 
         max-width: 100% !important; 
         object-fit: contain !important; 
     }
-    
-    /* Arrows drop into grid directly below the content, locking them in place */
-    .nav-btn { 
-        position: static !important; 
-        transform: none !important; 
-        font-size: 32px !important; 
-        padding: 16px 24px !important; 
-        width: auto !important;
-        height: auto !important;
-        line-height: 1 !important; 
-        font-weight: normal !important; /* Neutralizes Firefox font-weight inflation */
+
+    #page-counter { 
+        flex-shrink: 0 !important; 
+        margin-top: 12px !important; 
     }
-    .prev-btn { grid-column: 1 !important; grid-row: 2 !important; justify-self: end !important; }
-    .next-btn { grid-column: 2 !important; grid-row: 2 !important; justify-self: start !important; }
+
+    /* Arrows placed perfectly in the bottom safe zone */
+    .nav-btn { 
+        position: absolute !important; 
+        bottom: 30px !important; /* Well above the phone's bottom nav bar */
+        top: auto !important; 
+        transform: none !important; 
+        font-size: 36px !important; 
+        padding: 16px 24px !important; 
+        z-index: 1010 !important; 
+        font-weight: normal !important; /* Keeps them thin and sleek */
+    }
     
-    .close-btn { font-size: 40px !important; top: 10px !important; right: 20px !important; line-height: 1 !important; }
-    .project-text { padding: 0 16px !important; margin-bottom: 12px !important; }
-    #project-title { font-size: 20px !important; margin-bottom: 4px !important; }
-    #project-desc { font-size: 14px !important; margin-bottom: 0 !important; }
-    #page-counter { margin-top: 12px !important; }
+    /* Widened the gap for chubby fingers! */
+    .prev-btn { left: 15vw !important; }
+    .next-btn { right: 15vw !important; }
 }
