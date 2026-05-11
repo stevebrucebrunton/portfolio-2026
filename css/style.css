@@ -38,6 +38,8 @@
 }
 
 /* - 2. GLOBAL STYLES - */
+/* UPDATED: The Nuclear Horizontal Lock prevents Firefox from breaking the layout width */
+html, body { overflow-x: hidden; width: 100%; }
 html { overflow-y: scroll; }
 body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
@@ -59,14 +61,15 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
 .bg-5 { background-image: url('../images/bg5.avif'); z-index: -102; }
 .bg-6 { background-image: url('../images/bg6.avif'); z-index: -101; }
 
-.site-wrapper { position: relative; z-index: 10; width: var(--container-width); max-width: 100%; margin: 0 auto; background-color: var(--white); padding: var(--space-xl); box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; }
+/* UPDATED: max-width changed to 100vw to ensure it respects viewport rules across all browsers */
+.site-wrapper { position: relative; z-index: 10; width: var(--container-width); max-width: 100vw; margin: 0 auto; background-color: var(--white); padding: var(--space-xl); box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; }
 
 header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xxl); }
 main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
-.logo-container { position: relative; display: inline-block; width: 100%; max-width: 448px; }
-/* UPDATED: width 100% prevents horizontal scroll blowout on mobile */
-.main-logo { display: block; width: 100%; height: auto; }
+/* UPDATED: Added box-sizing to enforce strict boundaries on Firefox */
+.logo-container { position: relative; display: inline-block; width: 100%; max-width: 448px; box-sizing: border-box; }
+.main-logo { display: block; width: 100%; height: auto; max-width: 100%; }
 .logo-hover-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; cursor: default; }
 
 .main-nav a { 
@@ -105,7 +108,6 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 .gallery-item:nth-child(7)::after { background-color: var(--Blue-500); }
 .gallery-item:nth-child(8)::after { background-color: var(--Primary-Red-900); }
 
-/* UPDATED: Added .touch-active for mobile tap-and-hold overlay */
 .gallery-item:hover::after,
 .gallery-item.touch-active::after { opacity: 0.7; }
 
@@ -192,8 +194,8 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
 /* - 9. RESPONSIVENESS (PHONES) - */
 @media (max-width: 768px) {
-    .site-wrapper { padding: 16px; } /* Shrinks outer whitespace */
+    .site-wrapper { padding: 16px; } 
     header { gap: 24px; margin-bottom: 48px; }
-    .gallery-grid { gap: 8px; } /* Tighter 2x2 grid makes thumbnails physically larger */
-    .bg-layer { display: none !important; } /* Strips out backgrounds for clean white layout */
+    .gallery-grid { gap: 8px; } 
+    .bg-layer { display: none !important; } 
 }
