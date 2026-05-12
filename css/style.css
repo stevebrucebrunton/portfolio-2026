@@ -191,90 +191,90 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
 /* - 9. RESPONSIVENESS (PHONES) - */
 @media (max-width: 768px) {
-    .site-wrapper { padding: 16px !important; } 
-    header { gap: 24px !important; margin-bottom: 48px !important; }
-    .gallery-grid { gap: 8px !important; } 
+    .site-wrapper { padding: 16px; } 
+    header { gap: 24px; margin-bottom: 48px; }
+    .gallery-grid { gap: 8px; } 
     .bg-layer { display: none !important; } 
 
-    /* Bulletproof Scroll Lock */
+    /* The Ultimate Scroll Lock */
     .lightbox-container {
-        flex-direction: column !important;
-        justify-content: center !important; 
-        align-items: center !important;
-        padding: 0 !important; /* Zero padding stops the layout height from blowing out */
-        height: 100dvh !important; 
-        width: 100vw !important;
-        overflow: hidden !important; 
-        box-sizing: border-box !important;
+        /* No display properties here, letting JS naturally turn it on/off */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100dvh;
+        overflow: hidden; /* Hard locks scrolling */
+        overscroll-behavior: none; /* Stops the browser UI from bouncing */
+        box-sizing: border-box;
+        padding: 0; /* Removing padding prevents math blowouts */
     }
 
-    /* Content Area - Centers everything automatically */
-    .lightbox-content { 
-        position: relative !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100% !important; 
-        max-width: 100% !important;
-        height: 100% !important;
-        padding: 70px 16px 90px 16px !important; /* Top gap protects X, Bottom gap protects Arrows */
-        box-sizing: border-box !important;
-        z-index: 1002 !important;
-    }
-
-    /* Keep text fully centered and contained */
-    .project-text { 
-        width: 100% !important;
-        text-align: center !important; 
-        margin-bottom: 16px !important; 
-        flex-shrink: 0 !important;
-    }
-    
-    #project-title { font-size: 26px !important; margin-bottom: 4px !important; line-height: 1.2 !important; }
-    #project-desc { font-size: 14px !important; margin-bottom: 0 !important; }
-
-    /* Image sizing - Hard limits prevent blowout and scrolling */
-    #lightbox-img { 
-        max-height: 55vh !important; 
-        max-width: 100% !important; 
-        width: auto !important; 
-        height: auto !important;
-        object-fit: contain !important; 
-        flex-shrink: 1 !important; 
-        margin: 0 auto !important; 
-    }
-
-    #page-counter { 
-        width: 100% !important;
-        text-align: center !important;
-        margin-top: 12px !important; 
-        flex-shrink: 0 !important; 
-    }
-
-    /* Smaller, Clickable X Button */
+    /* Smaller Close Button */
     .close-btn { 
-        position: absolute !important; 
-        top: 16px !important; 
-        right: 20px !important; 
-        font-size: 36px !important; /* Shrunk down */
-        line-height: 1 !important; 
-        z-index: 1010 !important; /* Pulled forward so it's clickable */
-        padding: 8px !important; 
+        position: absolute; 
+        top: 16px; 
+        right: 20px; 
+        font-size: 32px; /* Smaller, doesn't overpower title */
+        line-height: 1; 
+        z-index: 1010;
+        padding: 8px; 
     }
 
-    /* Arrows spread out and locked at bottom */
-    .nav-btn { 
-        position: absolute !important; 
-        bottom: 24px !important; 
-        top: auto !important; 
-        transform: none !important; 
-        font-size: 36px !important; 
-        padding: 16px 24px !important; 
-        z-index: 1010 !important; 
-        font-weight: 300 !important; 
+    /* The Safe Zone for Content */
+    .lightbox-content { 
+        position: absolute;
+        top: 60px; /* Safe space below the X */
+        bottom: 100px; /* Safe space above the arrows */
+        left: 0;
+        right: 0;
+        width: 100%; 
+        max-width: 100%;
+        max-height: none; /* Let the absolute top/bottom dictate the size */
+        padding: 0 16px; 
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Pushes text and image to the top */
+        align-items: center;
+    }
+
+    .project-text { 
+        flex-shrink: 0; 
+        text-align: center; 
+        margin-bottom: 16px; 
+        width: 100%;
     }
     
-    .prev-btn { left: 15vw !important; } 
-    .next-btn { right: 15vw !important; }
+    /* UPDATED: Noticeably Larger Title Size */
+    #project-title { font-size: 32px; margin-bottom: 4px; line-height: 1.2; }
+    
+    #project-desc { font-size: 14px; margin-bottom: 0; }
+
+    /* The image perfectly fills the remaining space but never overflows */
+    #lightbox-img { 
+        flex-grow: 1; 
+        min-height: 0; /* Magic flexbox trick to allow shrinking */
+        max-height: 100%; 
+        width: auto; 
+        max-width: 100%; 
+        object-fit: contain; 
+    }
+
+    #page-counter { margin-top: 12px; flex-shrink: 0; }
+
+    /* Arrows raised up, thinned out, and spread apart */
+    .nav-btn { 
+        position: absolute; 
+        bottom: 40px; /* Lifted safely away from the phone's bottom nav */
+        top: auto; 
+        transform: none; 
+        font-size: 36px; 
+        padding: 16px 24px; 
+        z-index: 1010; 
+        font-weight: 300; /* Normalizes the thickness across browsers */
+    }
+    
+    .prev-btn { left: 15vw; } /* Spread out for chubby fingers */
+    .next-btn { right: 15vw; }
 }
