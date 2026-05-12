@@ -39,7 +39,6 @@
 
 /* - 2. GLOBAL STYLES - */
 html, body { overflow-x: hidden; width: 100%; }
-/* Removed forced vertical scrollbar to eliminate dead white space */
 body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 p { font-size: 16px; font-weight: 400; margin-bottom: var(--space-l); }
@@ -63,7 +62,7 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
 .site-wrapper { position: relative; z-index: 10; width: var(--container-width); max-width: 100vw; margin: 0 auto; background-color: var(--white); padding: var(--space-xl); box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; }
 
 header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xxl); }
-main { flex-grow: 1; } /* Removed bottom margin to prevent unnecessary scrolling */
+main { flex-grow: 1; }
 
 .logo-container { position: relative; display: inline-block; width: 100%; max-width: 448px; box-sizing: border-box; }
 .main-logo { display: block; width: 100%; height: auto; max-width: 100%; }
@@ -185,7 +184,6 @@ main { flex-grow: 1; } /* Removed bottom margin to prevent unnecessary scrolling
     .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .gallery-item { width: 100%; height: auto; aspect-ratio: 480 / 300; }
     
-    /* Fixed About Page Mobile Layout */
     .about-section { flex-direction: column; text-align: left; align-items: flex-start; }
     .about-text { width: 100%; }
     .about-image-container { flex: 0 0 auto; margin-bottom: var(--space-l); width: 100%; max-width: 444px; } 
@@ -200,11 +198,12 @@ main { flex-grow: 1; } /* Removed bottom margin to prevent unnecessary scrolling
     .gallery-grid { gap: 8px; } 
     .bg-layer { display: none !important; } 
     
-    /* Pull About text even closer on small phones */
-    .about-image-container { margin-bottom: 16px !important; }
+    /* Pulled the text up snugly beneath the photo */
+    .about-image-container { margin-bottom: 12px !important; }
 
     /* The Ultimate Scroll Lock */
     .lightbox-container {
+        /* display property handled by JS */
         position: fixed; 
         top: 0; 
         left: 0; 
@@ -213,13 +212,11 @@ main { flex-grow: 1; } /* Removed bottom margin to prevent unnecessary scrolling
         overflow: hidden; 
         overscroll-behavior: none; 
         padding: 0;
-        display: flex; 
         flex-direction: column; 
         justify-content: center; 
         align-items: center;
     }
 
-    /* Smaller Close Button */
     .close-btn { 
         position: absolute; 
         top: 16px; 
@@ -230,7 +227,6 @@ main { flex-grow: 1; } /* Removed bottom margin to prevent unnecessary scrolling
         padding: 8px; 
     }
 
-    /* The Safe Zone for Content */
     .lightbox-content { 
         display: flex;
         flex-direction: column;
@@ -253,7 +249,6 @@ main { flex-grow: 1; } /* Removed bottom margin to prevent unnecessary scrolling
     #project-title { font-size: 28px; margin-bottom: 4px; line-height: 1.1; }
     #project-desc { font-size: 14px; margin-bottom: 0; }
 
-    /* Strict max-height to completely kill the scroll blowout on posters */
     #lightbox-img { 
         flex-grow: 0; 
         max-height: 50vh; 
@@ -262,14 +257,12 @@ main { flex-grow: 1; } /* Removed bottom margin to prevent unnecessary scrolling
         object-fit: contain; 
     }
 
-    /* Counter stacks perfectly underneath the image */
     #page-counter { 
         margin-top: 12px; 
         text-align: center; 
         flex-shrink: 0; 
     }
 
-    /* Arrows pushed down, out, and normalized */
     .nav-btn { 
         position: absolute; 
         bottom: 30px; 
