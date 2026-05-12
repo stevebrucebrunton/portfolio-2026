@@ -196,89 +196,56 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     .gallery-grid { gap: 8px !important; } 
     .bg-layer { display: none !important; } 
 
-    /* Bulletproof Scroll Lock - Container is the exact size of the screen */
+    /* Adjusted CSS Grid: 1fr pushes content up, auto locks arrows to the bottom */
     .lightbox-container {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        height: 100dvh !important;
-        padding: 0 !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: 1fr auto !important; /* Forces row 1 to take all available space */
+        align-content: stretch !important;
+        padding: 60px 0 30px 0 !important;
         overflow: hidden !important; 
-        box-sizing: border-box !important;
-    }
-
-    /* Absolute Safe Zone: Leaves 70px at top, 90px at bottom */
-    .lightbox-content { 
-        position: absolute !important;
-        top: 70px !important; 
-        bottom: 90px !important; 
-        left: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        height: auto !important;
-        max-height: none !important; 
-        margin: 0 !important;
-        padding: 0 16px !important; 
-        box-sizing: border-box !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important; 
-        align-items: center !important;
-        z-index: 1002 !important;
-    }
-
-    .project-text { 
-        width: 100% !important;
-        text-align: center !important; 
-        margin-bottom: 16px !important; 
-        flex-shrink: 0 !important;
     }
     
-    #project-title { font-size: 32px !important; margin-bottom: 4px !important; line-height: 1.2 !important; }
-    #project-desc { font-size: 14px !important; margin-bottom: 0 !important; }
-
-    /* The image physically cannot expand beyond the safe zone now */
+    .lightbox-content { 
+        grid-column: 1 / span 2 !important;
+        grid-row: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important; /* Centers the whole block perfectly */
+        align-items: center !important;
+    }
+    
+    /* Strict Hard Limit completely prevents scrolling layout-shifts */
     #lightbox-img { 
-        flex-grow: 1 !important; 
-        min-height: 0 !important; 
-        max-height: 100% !important; 
+        max-height: 55vh !important; 
         width: auto !important; 
         max-width: 100% !important; 
         object-fit: contain !important; 
-        margin: 0 auto !important; 
-    }
-
-    #page-counter { 
-        width: 100% !important;
-        text-align: center !important;
-        margin-top: 12px !important; 
-        flex-shrink: 0 !important; 
-    }
-
-    /* Small Close Button bolted to the top right */
-    .close-btn { 
-        position: absolute !important; 
-        top: 16px !important; 
-        right: 20px !important; 
-        font-size: 36px !important; 
-        line-height: 1 !important; 
-        z-index: 1010 !important; 
-        padding: 8px !important; 
-    }
-
-    /* Arrows bolted to the bottom corners */
-    .nav-btn { 
-        position: absolute !important; 
-        bottom: 30px !important; 
-        top: auto !important; 
-        transform: none !important; 
-        font-size: 36px !important; 
-        padding: 16px 24px !important; 
-        z-index: 1010 !important; 
-        font-weight: 300 !important; 
     }
     
-    .prev-btn { left: 15vw !important; } 
-    .next-btn { right: 15vw !important; }
+    /* Arrows locked into row 2 at the bottom */
+    .nav-btn { 
+        position: static !important; 
+        transform: none !important; 
+        font-size: 32px !important; 
+        padding: 16px 24px !important; 
+        width: auto !important;
+        height: auto !important;
+        line-height: 1 !important; 
+        font-weight: normal !important; 
+    }
+    .prev-btn { grid-column: 1 !important; grid-row: 2 !important; justify-self: end !important; }
+    .next-btn { grid-column: 2 !important; grid-row: 2 !important; justify-self: start !important; }
+    
+    .close-btn { font-size: 40px !important; top: 10px !important; right: 20px !important; line-height: 1 !important; }
+    .project-text { padding: 0 16px !important; margin-bottom: 12px !important; }
+    
+    #project-title { font-size: 26px !important; margin-bottom: 4px !important; }
+    #project-desc { font-size: 14px !important; margin-bottom: 0 !important; }
+    
+    /* Keeps page counter snug beneath image and far from the arrows */
+    #page-counter { margin-top: 8px !important; margin-bottom: 0 !important; }
 }
