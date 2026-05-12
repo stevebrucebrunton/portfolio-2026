@@ -39,7 +39,7 @@
 
 /* - 2. GLOBAL STYLES - */
 html, body { overflow-x: hidden; width: 100%; }
-html { overflow-y: scroll; }
+/* Removed forced vertical scrollbar to eliminate dead white space */
 body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 p { font-size: 16px; font-weight: 400; margin-bottom: var(--space-l); }
@@ -63,7 +63,7 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
 .site-wrapper { position: relative; z-index: 10; width: var(--container-width); max-width: 100vw; margin: 0 auto; background-color: var(--white); padding: var(--space-xl); box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; }
 
 header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-xxl); }
-main { flex-grow: 1; margin-bottom: var(--space-xl); }
+main { flex-grow: 1; } /* Removed bottom margin to prevent unnecessary scrolling */
 
 .logo-container { position: relative; display: inline-block; width: 100%; max-width: 448px; box-sizing: border-box; }
 .main-logo { display: block; width: 100%; height: auto; max-width: 100%; }
@@ -184,8 +184,12 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     .main-nav a { margin-left: 0; } 
     .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .gallery-item { width: 100%; height: auto; aspect-ratio: 480 / 300; }
-    .about-section { flex-direction: column; text-align: center; align-items: center; }
-    .about-image-container { flex: 0 0 auto; margin-bottom: var(--space-xl); width: 100%; max-width: 444px; }
+    
+    /* Fixed About Page Mobile Layout */
+    .about-section { flex-direction: column; text-align: left; align-items: flex-start; }
+    .about-text { width: 100%; }
+    .about-image-container { flex: 0 0 auto; margin-bottom: var(--space-l); width: 100%; max-width: 444px; } 
+    
     .desktop-br { display: none; }
 }
 
@@ -195,8 +199,11 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     header { gap: 24px; margin-bottom: 48px; }
     .gallery-grid { gap: 8px; } 
     .bg-layer { display: none !important; } 
+    
+    /* Pull About text even closer on small phones */
+    .about-image-container { margin-bottom: 16px !important; }
 
-    /* Lock the screen, completely center the contents */
+    /* The Ultimate Scroll Lock */
     .lightbox-container {
         position: fixed; 
         top: 0; 
@@ -223,14 +230,14 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
         padding: 8px; 
     }
 
-    /* Clean vertical stack for Text -> Image -> Counter */
+    /* The Safe Zone for Content */
     .lightbox-content { 
         display: flex;
         flex-direction: column;
         justify-content: center; 
         align-items: center;
         width: 100%; 
-        max-height: calc(100dvh - 160px); /* Keeps it safely between the top X and bottom arrows */
+        max-height: calc(100dvh - 160px); 
         padding: 0 16px; 
         box-sizing: border-box;
     }
