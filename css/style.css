@@ -112,6 +112,7 @@ main { flex-grow: 1; }
 .about-image-container { flex: 0 0 444px; margin: 0; }
 .about-image-container img { width: 100%; height: auto; }
 .about-text { flex: 1; }
+.about-text p { font-size: 18px; }
 .about-text p:first-child { margin-top: -5px; }
 
 .desktop-br { display: inline; }
@@ -198,12 +199,11 @@ main { flex-grow: 1; }
     .gallery-grid { gap: 8px; } 
     .bg-layer { display: none !important; } 
     
-    /* Pulled the text up snugly beneath the photo */
-    .about-image-container { margin-bottom: 12px !important; }
+    /* Pulled the text up exactly 10px beneath the photo */
+    .about-image-container { margin-bottom: 10px !important; }
 
-    /* The Ultimate Scroll Lock */
+    /* The Ultimate Scroll Lock + Darkened Background */
     .lightbox-container {
-        /* display property handled by JS */
         position: fixed; 
         top: 0; 
         left: 0; 
@@ -215,6 +215,7 @@ main { flex-grow: 1; }
         flex-direction: column; 
         justify-content: center; 
         align-items: center;
+        background-color: rgba(0, 0, 0, 0.98) !important;
     }
 
     .close-btn { 
@@ -245,7 +246,6 @@ main { flex-grow: 1; }
         width: 100%;
     }
     
-    /* Bigger Title */
     #project-title { font-size: 28px; margin-bottom: 4px; line-height: 1.1; }
     #project-desc { font-size: 14px; margin-bottom: 0; }
 
