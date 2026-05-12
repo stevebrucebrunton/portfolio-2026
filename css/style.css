@@ -196,18 +196,20 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
     .gallery-grid { gap: 8px; } 
     .bg-layer { display: none !important; } 
 
-    /* The Ultimate Scroll Lock */
+    /* Lock the screen, completely center the contents */
     .lightbox-container {
-        /* No display properties here, letting JS naturally turn it on/off */
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100vw; 
         height: 100dvh;
-        overflow: hidden; /* Hard locks scrolling */
-        overscroll-behavior: none; /* Stops the browser UI from bouncing */
-        box-sizing: border-box;
-        padding: 0; /* Removing padding prevents math blowouts */
+        overflow: hidden; 
+        overscroll-behavior: none; 
+        padding: 0;
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;
     }
 
     /* Smaller Close Button */
@@ -215,28 +217,22 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
         position: absolute; 
         top: 16px; 
         right: 20px; 
-        font-size: 32px; /* Smaller, doesn't overpower title */
+        font-size: 32px; 
         line-height: 1; 
         z-index: 1010;
         padding: 8px; 
     }
 
-    /* The Safe Zone for Content */
+    /* Clean vertical stack for Text -> Image -> Counter */
     .lightbox-content { 
-        position: absolute;
-        top: 60px; /* Safe space below the X */
-        bottom: 100px; /* Safe space above the arrows */
-        left: 0;
-        right: 0;
-        width: 100%; 
-        max-width: 100%;
-        max-height: none; /* Let the absolute top/bottom dictate the size */
-        padding: 0 16px; 
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* Pushes text and image to the top */
+        justify-content: center; 
         align-items: center;
+        width: 100%; 
+        max-height: calc(100dvh - 160px); /* Keeps it safely between the top X and bottom arrows */
+        padding: 0 16px; 
+        box-sizing: border-box;
     }
 
     .project-text { 
@@ -246,35 +242,38 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
         width: 100%;
     }
     
-    /* UPDATED: Noticeably Larger Title Size */
-    #project-title { font-size: 32px; margin-bottom: 4px; line-height: 1.2; }
-    
+    /* Bigger Title */
+    #project-title { font-size: 28px; margin-bottom: 4px; line-height: 1.1; }
     #project-desc { font-size: 14px; margin-bottom: 0; }
 
-    /* The image perfectly fills the remaining space but never overflows */
+    /* Strict max-height to completely kill the scroll blowout on posters */
     #lightbox-img { 
-        flex-grow: 1; 
-        min-height: 0; /* Magic flexbox trick to allow shrinking */
-        max-height: 100%; 
+        flex-grow: 0; 
+        max-height: 50vh; 
         width: auto; 
         max-width: 100%; 
         object-fit: contain; 
     }
 
-    #page-counter { margin-top: 12px; flex-shrink: 0; }
+    /* Counter stacks perfectly underneath the image */
+    #page-counter { 
+        margin-top: 12px; 
+        text-align: center; 
+        flex-shrink: 0; 
+    }
 
-    /* Arrows raised up, thinned out, and spread apart */
+    /* Arrows pushed down, out, and normalized */
     .nav-btn { 
         position: absolute; 
-        bottom: 40px; /* Lifted safely away from the phone's bottom nav */
+        bottom: 30px; 
         top: auto; 
         transform: none; 
         font-size: 36px; 
         padding: 16px 24px; 
         z-index: 1010; 
-        font-weight: 300; /* Normalizes the thickness across browsers */
+        font-weight: normal; 
     }
     
-    .prev-btn { left: 15vw; } /* Spread out for chubby fingers */
-    .next-btn { right: 15vw; }
+    .prev-btn { left: 10vw; } 
+    .next-btn { right: 10vw; } 
 }
