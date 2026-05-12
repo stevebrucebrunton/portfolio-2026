@@ -191,90 +191,61 @@ main { flex-grow: 1; margin-bottom: var(--space-xl); }
 
 /* - 9. RESPONSIVENESS (PHONES) - */
 @media (max-width: 768px) {
-    .site-wrapper { padding: 16px; } 
-    header { gap: 24px; margin-bottom: 48px; }
-    .gallery-grid { gap: 8px; } 
+    .site-wrapper { padding: 16px !important; } 
+    header { gap: 24px !important; margin-bottom: 48px !important; }
+    .gallery-grid { gap: 8px !important; } 
     .bg-layer { display: none !important; } 
 
-    /* The Ultimate Scroll Lock */
+    /* Adjusted CSS Grid: 1fr pushes content up, auto locks arrows to the bottom */
     .lightbox-container {
-        /* No display properties here, letting JS naturally turn it on/off */
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100dvh;
-        overflow: hidden; /* Hard locks scrolling */
-        overscroll-behavior: none; /* Stops the browser UI from bouncing */
-        box-sizing: border-box;
-        padding: 0; /* Removing padding prevents math blowouts */
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: 1fr auto !important; /* Forces row 1 to take all available space */
+        align-content: stretch !important;
+        padding: 60px 0 30px 0 !important;
+        overflow: hidden !important; 
     }
-
-    /* Smaller Close Button */
-    .close-btn { 
-        position: absolute; 
-        top: 16px; 
-        right: 20px; 
-        font-size: 32px; /* Smaller, doesn't overpower title */
-        line-height: 1; 
-        z-index: 1010;
-        padding: 8px; 
-    }
-
-    /* The Safe Zone for Content */
+    
     .lightbox-content { 
-        position: absolute;
-        top: 60px; /* Safe space below the X */
-        bottom: 100px; /* Safe space above the arrows */
-        left: 0;
-        right: 0;
-        width: 100%; 
-        max-width: 100%;
-        max-height: none; /* Let the absolute top/bottom dictate the size */
-        padding: 0 16px; 
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start; /* Pushes text and image to the top */
-        align-items: center;
-    }
-
-    .project-text { 
-        flex-shrink: 0; 
-        text-align: center; 
-        margin-bottom: 16px; 
-        width: 100%;
+        grid-column: 1 / span 2 !important;
+        grid-row: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important; /* Centers the whole block perfectly */
+        align-items: center !important;
     }
     
-    /* UPDATED: Noticeably Larger Title Size */
-    #project-title { font-size: 26px; margin-bottom: 4px; line-height: 1.2; }
-    
-    #project-desc { font-size: 14px; margin-bottom: 0; }
-
-    /* The image perfectly fills the remaining space but never overflows */
+    /* Strict Hard Limit completely prevents scrolling layout-shifts */
     #lightbox-img { 
-        flex-grow: 1; 
-        min-height: 0; /* Magic flexbox trick to allow shrinking */
-        max-height: 100%; 
-        width: auto; 
-        max-width: 100%; 
-        object-fit: contain; 
-    }
-
-    #page-counter { margin-top: 12px; flex-shrink: 0; }
-
-    /* Arrows raised up, thinned out, and spread apart */
-    .nav-btn { 
-        position: absolute; 
-        bottom: 40px; /* Lifted safely away from the phone's bottom nav */
-        top: auto; 
-        transform: none; 
-        font-size: 36px; 
-        padding: 16px 24px; 
-        z-index: 1010; 
-        font-weight: 300; /* Normalizes the thickness across browsers */
+        max-height: 55vh !important; 
+        width: auto !important; 
+        max-width: 100% !important; 
+        object-fit: contain !important; 
     }
     
-    .prev-btn { left: 15vw; } /* Spread out for chubby fingers */
-    .next-btn { right: 15vw; }
+    /* Arrows locked into row 2 at the bottom */
+    .nav-btn { 
+        position: static !important; 
+        transform: none !important; 
+        font-size: 32px !important; 
+        padding: 16px 24px !important; 
+        width: auto !important;
+        height: auto !important;
+        line-height: 1 !important; 
+        font-weight: normal !important; 
+    }
+    .prev-btn { grid-column: 1 !important; grid-row: 2 !important; justify-self: end !important; }
+    .next-btn { grid-column: 2 !important; grid-row: 2 !important; justify-self: start !important; }
+    
+    .close-btn { font-size: 40px !important; top: 10px !important; right: 20px !important; line-height: 1 !important; }
+    .project-text { padding: 0 16px !important; margin-bottom: 12px !important; }
+    
+    #project-title { font-size: 26px !important; margin-bottom: 4px !important; }
+    #project-desc { font-size: 14px !important; margin-bottom: 0 !important; }
+    
+    /* Keeps page counter snug beneath image and far from the arrows */
+    #page-counter { margin-top: 8px !important; margin-bottom: 0 !important; }
 }
