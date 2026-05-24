@@ -48,7 +48,6 @@ a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: va
 .bg-layer { 
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-size: cover; background-position: center; background-repeat: no-repeat;
-    transition: opacity 0.2s ease-in-out; 
     z-index: -100;
 }
 
@@ -199,8 +198,8 @@ main { flex-grow: 1; }
     .gallery-grid { gap: 8px; } 
     .bg-layer { display: none !important; } 
     
-    /* Pulled the text up exactly 10px beneath the photo */
-    .about-image-container { margin-bottom: 10px !important; }
+    /* Pulled the text up exactly 8px beneath the photo */
+    .about-image-container { margin-bottom: 8px !important; }
 
     /* The Ultimate Scroll Lock + Darkened Background */
     .lightbox-container {
