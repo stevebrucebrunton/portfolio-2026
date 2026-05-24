@@ -39,7 +39,9 @@
 
 /* - 2. GLOBAL STYLES - */
 html, body { overflow-x: hidden; width: 100%; }
-body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased;
+font-variant-ligatures: no-contextual;
+    font-feature-settings: "calt" 0; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 p { font-size: 16px; font-weight: 400; margin-bottom: var(--space-l); }
 a { font-size: 16px; text-transform: uppercase; text-decoration: none; color: var(--black); transition: color 0.2s; }
