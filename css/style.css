@@ -107,7 +107,7 @@ main { flex-grow: 1; }
 .gallery-item:nth-child(5)::after { background-color: var(--Yellow-400); }
 .gallery-item:nth-child(6)::after { background-color: var(--Pink-400); }
 .gallery-item:nth-child(7)::after { background-color: var(--Blue-500); }
-.gallery-item:nth-child(8)::after { background-color: var(--Primary-Red-900); }
+.gallery-item:nth-child(8)::after { background-color: var(#7FB285); }
 
 .gallery-item:hover::after,
 .gallery-item.touch-active::after { opacity: 0.7; }
