@@ -23,6 +23,7 @@
     --Primary-Red-900: #8C1C13;
     --Red-300: #FFA39C;
     --Yellow-400: #FFD31B;
+    --BrownYellow: #786c3d; 
     --Pink-400: #E680AB;
     --Blue-500: #498791;
     --Green-100: #78c876e9; 
@@ -106,8 +107,8 @@ main { flex-grow: 1; }
 .gallery-item:nth-child(1)::after { background-color: var(--Red-300); }
 .gallery-item:nth-child(2)::after { background-color: var(--Green-200); }
 .gallery-item:nth-child(3)::after { background-color: var(--Blue-400); }
-.gallery-item:nth-child(4)::after { background-color: var(#786c3d); }
-.gallery-item:nth-child(5)::after { background-color: var(--Yellow-400); }
+.gallery-item:nth-child(4)::after { background-color: var(--Red-300); }
+.gallery-item:nth-child(5)::after { background-color: var(--BrownYellow); }
 .gallery-item:nth-child(6)::after { background-color: var(--Red-500); }
 .gallery-item:nth-child(7)::after { background-color: var(--Blue-400); }
 .gallery-item:nth-child(8)::after { background-color: var(--Green-100); }
