@@ -104,14 +104,14 @@ main { flex-grow: 1; }
 .gallery-item { position: relative; width: var(--thumb-width); height: var(--thumb-height); background-color: var(--light-grey); background-size: cover; background-position: center; cursor: pointer; }
 .gallery-item::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.2s; z-index: 1; }
 
-.gallery-item:nth-child(1)::after { background-color: var(--Red-300); }
+.gallery-item:nth-child(1)::after { background-color: var(--Red-500); }
 .gallery-item:nth-child(2)::after { background-color: var(--Green-200); }
 .gallery-item:nth-child(3)::after { background-color: var(--Blue-400); }
 .gallery-item:nth-child(4)::after { background-color: var(--BrownYellow); }
-.gallery-item:nth-child(5)::after { background-color: var(--Yellow-400); }
-.gallery-item:nth-child(6)::after { background-color: var(--Red-500); }
+.gallery-item:nth-child(5)::after { background-color: var(--Red-300); }
+.gallery-item:nth-child(6)::after { background-color: var(--Blue-500); }
 .gallery-item:nth-child(7)::after { background-color: var(--Blue-400); }
-.gallery-item:nth-child(8)::after { background-color: var(--Green-100); }
+.gallery-item:nth-child(8)::after { background-color: var(--Yellow-400); }
 
 .gallery-item:hover::after,
 .gallery-item.touch-active::after { opacity: 0.8; }
