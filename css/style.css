@@ -12,7 +12,10 @@
     --grid-gap: 24px;
     --thumb-width: 480px;
     --thumb-height: 300px;
-    --Grey-950: #0c0c0c;
+    
+    /* Updated core dark text to match logo */
+    --Grey-950: #1e1e1e; 
+    
     --Grey-100: #f0f0f0;
     --Grey-50: #ffffff;
     --Primary-Pink-500: #DA588C;
@@ -33,13 +36,20 @@
     --Green-100: #70b190e9; 
     --Green-200: #79a779; 
     --Cream-100: #F0EBD3;
+    
+    /* New custom hover color */
+    --hover-pink: #f580b4;
+
     --black: var(--Grey-950);
     --white: var(--Grey-50);
     --light-grey: var(--Grey-100);
     --pink: var(--Primary-Pink-500);
     --red: var(--Red-500);
     --btn-main: var(--Red-800);
-    --btn-hover: var(--Pink-925);
+    
+    /* Apply new hover color to buttons */
+    --btn-hover: var(--hover-pink); 
+    
     --btn-active: var(--Pink-950);
     --space-xs: 4px; --space-s: 8px; --space-m: 16px; --space-l: 24px; --space-xl: 64px; --space-xxl: 128px;
     --font-main: 'Cy', sans-serif;
@@ -82,7 +92,8 @@ main { flex-grow: 1; }
     transition: color 0.2s;
 }
 
-.main-nav a:hover { color: var(--pink) !important; }
+/* Updated hover color for nav */
+.main-nav a:hover { color: var(--hover-pink) !important; }
 .main-nav a:active { color: var(--red) !important; }
 .main-nav a.active { font-weight: 400; }
 
@@ -185,6 +196,7 @@ main { flex-grow: 1; }
 .prev-btn { left: 16px; }
 .next-btn { right: 16px; }
 
+/* The lightbox hover remains var(--pink) as requested */
 .nav-btn:hover, .close-btn:hover { color: var(--pink); }
 
 /* - 8. RESPONSIVENESS (TABLETS) - */
