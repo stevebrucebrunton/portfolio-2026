@@ -4,7 +4,7 @@
 @font-face { font-family: 'Cy'; src: url('../fonts/cy-bold.ttf') format('truetype'); font-weight: 700; }
 @font-face { font-family: 'Cy'; src: url('../fonts/cy-black.ttf') format('truetype'); font-weight: 900; }
 @font-face { font-family: 'MuseoSans'; src: url('../fonts/MuseoSans-100.ttf') format('truetype'); font-weight: 100; }
-@font-face { font-family: 'Stolzl'; src: url('../fonts/Stolzl-Book.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Stolzl'; src: url('../fonts/Stolzl-Bold.ttf') format('truetype'); font-weight: 400; }
 
 /* - 1. DESIGN SYSTEM / TOKENS - */
 :root {
