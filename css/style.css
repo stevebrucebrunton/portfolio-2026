@@ -6,6 +6,7 @@
 @font-face { font-family: 'MuseoSans'; src: url('../fonts/MuseoSans-100.ttf') format('truetype'); font-weight: 100; }
 @font-face { font-family: 'MuseoSans300'; src: url('../fonts/MuseoSans-300Regular.ttf') format('truetype'); font-weight: 300; }
 @font-face { font-family: 'Stolzl'; src: url('../fonts/Stolzl-Bold.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'StolzlBook'; src: url('../fonts/Stolzl-Book.ttf') format('truetype'); font-weight: 400; }
 
 /* - 1. DESIGN SYSTEM / TOKENS - */
 :root {
@@ -125,7 +126,7 @@ main { flex-grow: 1; }
     opacity: 0.65; 
 }
 
-/* Central Hover Text - Top-Left Justified, 60% Width */
+/* Central Hover Text - Top-Left Justified, 60% Width, StolzlBook */
 .gallery-item::before {
     content: attr(data-title);
     position: absolute;
@@ -134,8 +135,8 @@ main { flex-grow: 1; }
     transform: translate(-50%, -50%);
     width: 60%;
     color: var(--black);
-    font-family: 'MuseoSans300', sans-serif;
-    font-size: 26px; 
+    font-family: 'StolzlBook', sans-serif;
+    font-size: 34px; 
     text-transform: uppercase;
     text-align: left;
     line-height: 1.1;
@@ -211,7 +212,7 @@ main { flex-grow: 1; }
 .lightbox-content { display: flex; flex-direction: column; max-width: 90%; max-height: 90%; width: 100%; align-items: center; z-index: 1002; position: relative;}
 .project-text { margin-bottom: var(--space-m); color: var(--white); text-align: center; }
 
-/* Swapping out Cy for MuseoSans in the lightbox text */
+/* MuseoSans300 for lightbox text */
 #project-title { font-weight: 700; margin-bottom: var(--space-s); font-family: 'MuseoSans300', sans-serif; }
 #project-desc { font-family: 'MuseoSans300', sans-serif; }
 

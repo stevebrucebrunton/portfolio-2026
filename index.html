@@ -3,31 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work | Steve Brunton</title>
-    <meta name="description" content="Portfolio of Steve Brunton, a Toronto-based graphic designer specializing in minimalist and illustrative design.">
-    
-    <meta property="og:title" content="Work | Steve Brunton">
-    <meta property="og:description" content="Portfolio of Steve Brunton, a Toronto-based graphic designer specializing in minimalist and illustrative design.">
-    <meta property="og:image" content="https://www.stevebrunton.com/images/headshot.png">
-    <meta property="og:url" content="https://www.stevebrunton.com">
-    
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    
-    <link rel="preload" as="image" href="images/bg2.avif">
-    
+    <title>Steve Brunton | Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="bg-layer"></div>
-
+    
     <div class="site-wrapper">
         <header>
             <div class="logo-container">
-                <a href="index.html">
-                    <img src="images/logo1.svg" class="main-logo" alt="Steve Brunton Logo">
-                </a>
+                <!-- Replace with your actual logo path -->
+                <img src="images/logo.png" alt="Steve Brunton" class="main-logo">
             </div>
-            <nav class="main-nav" aria-label="Main Navigation">
+            <nav class="main-nav">
                 <a href="index.html" class="active">Work</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
@@ -35,35 +23,77 @@
         </header>
 
         <main>
-            <div class="gallery-grid">
-                <div class="gallery-item" tabindex="0" role="img" aria-label="The Met Rentals catalogue" style="background-image: url('images/thumb1.png');" data-src="images/mr1.avif, images/mr2.avif, images/mr3.avif, images/mr4.avif, images/mr5.avif, images/mr6.avif, images/mr7.avif" data-title="The Met Rentals (2O26)" data-desc="Concept catalogue layout"></div>
+            <div class="gallery-grid loaded">
                 
-                <div class="gallery-item" tabindex="0" role="img" aria-label="NOTLD poster concept" style="background-image: url('images/thumb2.png');" data-src="images/image2.avif" data-title="NOTLD (2O25)" data-desc="Movie poster concept"></div>
-                <div class="gallery-item" tabindex="0" role="img" aria-label="Monster Gospel album cover" style="background-image: url('images/thumb3.png');" data-src="images/image3.avif" data-title="Monster Gospel (2O26)" data-desc="Album cover design"></div>
-                <div class="gallery-item" tabindex="0" role="img" aria-label="Teeth Eaters illustration" style="background-image: url('images/thumb4.png');" data-src="images/image4.avif" data-title="Teeth Eaters (2O26)" data-desc="Editorial illustration"></div>
-                <div class="gallery-item" tabindex="0" role="img" aria-label="The Picture of Dorian Gray cover" style="background-image: url('images/thumb5.png');" data-src="images/image5.avif" data-title="The Picture of Dorian Gray (2O26)" data-desc="Book cover concept"></div>
-                <div class="gallery-item" tabindex="0" role="img" aria-label="Red BG with blocky lettering reads Faust, with Goethe underneath in smaller text" style="background-image: url('images/thumb6.png');" data-src="images/image6.avif" data-title="Faust (2O26)" data-desc="Book cover concept"></div>
-                <div class="gallery-item" tabindex="0" role="img" aria-label="Starbucks ad concept" style="background-image: url('images/thumb7.png');" data-src="images/image7.avif" data-title="They Still Suck (2O25)" data-desc="Ad concept"></div>
-                <div class="gallery-item" tabindex="0" role="img" aria-label="Tax The Rich poster" style="background-image: url('images/thumb8.png');" data-src="images/image8.avif" data-title="Tax The Rich (2O25)" data-desc="Poster design"></div>
+                <!-- Image 1 -->
+                <div class="gallery-item" style="background-image: url('images/image1.jpg');" 
+                     data-title="MILKWEED CONCERT POSTER" 
+                     data-desc="Medieval British woodcut style poster featuring scanned ink textures.">
+                </div>
+                
+                <!-- Image 2 -->
+                <div class="gallery-item" style="background-image: url('images/image2.jpg');" 
+                     data-title="RAWHEAD REX 35MM RETROSPECTIVE POSTER" 
+                     data-desc="A spec poster designed for a Clive Barker film retrospective at the Revue Cinema in Toronto.">
+                </div>
+
+                <!-- Image 3 -->
+                <div class="gallery-item" style="background-image: url('images/image3.jpg');" 
+                     data-title="IRON KETTLE TEA PACKAGING" 
+                     data-desc="Brand identity and packaging concept utilizing a muted olive and chocolate palette with a front-dispensing punch-out.">
+                </div>
+
+                <!-- Image 4 -->
+                <div class="gallery-item" style="background-image: url('images/image4.jpg');" 
+                     data-title="TORONTO AFTER DARK LOGO" 
+                     data-desc="Festival logo redesign featuring an eye motif, retro starbursts, and a desaturated blood-pink color scheme.">
+                </div>
+
+                <!-- Image 5 -->
+                <div class="gallery-item" style="background-image: url('images/image5.jpg');" 
+                     data-title="DORIAN GRAY BOOK COVERS" 
+                     data-desc="Cover designs exploring the theme of duality with ornate gold contrasting against weathered grey.">
+                </div>
+
+                <!-- Image 6 -->
+                <div class="gallery-item" style="background-image: url('images/image6.jpg');" 
+                     data-title="FAUST BOOK COVER" 
+                     data-desc="Dark charcoal cover featuring a red devil silhouette and thick sans-serif typography.">
+                </div>
+
+                <!-- Image 7 -->
+                <div class="gallery-item" style="background-image: url('images/image7.jpg');" 
+                     data-title="MET RENTALS ART CATALOGUE" 
+                     data-desc="Minimalist baroque style catalogue spread featuring photo-manipulated party scenes.">
+                </div>
+
+                <!-- Image 8 -->
+                <div class="gallery-item" style="background-image: url('images/image8.jpg');" 
+                     data-title="NIGHT OF THE LIVING DEAD" 
+                     data-desc="Spec poster design for the classic horror film, utilizing heavy textures, high contrast elements, and stark typography.">
+                </div>
+
             </div>
         </main>
     </div>
 
-    <div id="lightbox" class="lightbox-container" role="dialog" aria-modal="true">
-        <span class="close-btn" tabindex="0" role="button" aria-label="Close Project Viewer">&times;</span>
-        <span class="nav-btn prev-btn" tabindex="0" role="button" aria-label="Previous Project">&#10094;</span>
-        <span class="nav-btn next-btn" tabindex="0" role="button" aria-label="Next Project">&#10095;</span>
+    <!-- Lightbox -->
+    <div class="lightbox-container" id="lightbox">
+        <span class="close-btn">&times;</span>
+        <span class="nav-btn prev-btn">&#10094;</span>
+        
         <div class="lightbox-content">
             <div class="project-text">
                 <h3 id="project-title"></h3>
                 <p id="project-desc"></p>
+                <div id="page-counter"></div>
             </div>
-            <img id="lightbox-img" src="images/mr1.avif" alt="Detailed view">
-            <div id="page-counter"></div>
+            <img id="lightbox-img" src="" alt="Project View">
         </div>
+        
+        <span class="nav-btn next-btn">&#10095;</span>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
