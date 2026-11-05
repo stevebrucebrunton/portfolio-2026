@@ -3,6 +3,7 @@
 @font-face { font-family: 'Cy'; src: url('../fonts/cy-regular.ttf') format('truetype'); font-weight: 400; }
 @font-face { font-family: 'Cy'; src: url('../fonts/cy-bold.ttf') format('truetype'); font-weight: 700; }
 @font-face { font-family: 'Cy'; src: url('../fonts/cy-black.ttf') format('truetype'); font-weight: 900; }
+@font-face { font-family: 'MuseoSans'; src: url('../fonts/MuseoSans-100.ttf') format('truetype'); font-weight: 100; }
 
 /* - 1. DESIGN SYSTEM / TOKENS - */
 :root {
@@ -116,7 +117,11 @@ main { flex-grow: 1; }
 .about-image-container { flex: 0 0 444px; margin: 0; }
 .about-image-container img { width: 100%; height: auto; }
 .about-text { flex: 1; }
-.about-text p { font-size: 18px; }
+.about-text p { 
+    font-family: 'MuseoSans', sans-serif; 
+    font-weight: 100;
+    font-size: 18px; 
+}
 .about-text p:first-child { margin-top: -5px; }
 
 .desktop-br { display: inline; }
