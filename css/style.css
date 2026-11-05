@@ -4,7 +4,7 @@
 @font-face { font-family: 'Cy'; src: url('../fonts/cy-bold.ttf') format('truetype'); font-weight: 700; }
 @font-face { font-family: 'Cy'; src: url('../fonts/cy-black.ttf') format('truetype'); font-weight: 900; }
 @font-face { font-family: 'MuseoSans'; src: url('../fonts/MuseoSans-100.ttf') format('truetype'); font-weight: 100; }
-@font-face { font-family: 'Stolzl'; src: url('../fonts/Stolzl-Book.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Stolzl'; src: url('../fonts/Stolzl-Bold.ttf') format('truetype'); font-weight: 400; }
 
 /* - 1. DESIGN SYSTEM / TOKENS - */
 :root {
@@ -133,8 +133,8 @@ main { flex-grow: 1; }
 }
 
 /* - 5. ABOUT PAGE - */
-/* Changed align-items to center for vertical centering of photo and text */
-.about-section { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: var(--space-xl); text-align: left; }
+/* Changed align-items back to flex-start so text and image sit flush at the top */
+.about-section { max-width: 1000px; margin: 0 auto; display: flex; align-items: flex-start; gap: var(--space-xl); text-align: left; }
 .about-image-container { flex: 0 0 444px; margin: 0; }
 .about-image-container img { width: 100%; height: auto; }
 .about-text { flex: 1; }
