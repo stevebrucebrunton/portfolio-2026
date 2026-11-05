@@ -2,11 +2,8 @@ $(document).ready(function() {
     console.log("PORTFOLIO LOGIC LOADED");
 
     /* - 1. TRAFFIC CONTROLLER: VIP PRELOAD & GRID REVEAL - */
-    $('<img/>')[0].src = 'images/bg2.avif';
-    $('<img/>')[0].src = 'images/bg3.avif';
-
     const $grid = $('.gallery-grid');
-    let essentialMedia = ['images/bg1.avif']; 
+    let essentialMedia = ['images/bg2.avif']; 
     
     $('.gallery-item').each(function() {
         let bgUrl = $(this).css('background-image');
@@ -18,7 +15,7 @@ $(document).ready(function() {
 
     function revealGrid() {
         $grid.addClass('loaded');
-        preloadHeavyMedia(); 
+        preloadGalleryMedia(); 
     }
 
     if (essentialMedia.length > 0) {
@@ -41,18 +38,8 @@ $(document).ready(function() {
         revealGrid();
     }
 
-    /* - 2. HEAVY MEDIA PRELOADER (OPTIMIZED FOR MOBILE) - */
-    function preloadHeavyMedia() {
-        // Only burn data preloading heavy backgrounds if screen is larger than a phone
-        if ($(window).width() > 768) {
-            const remainingBgs = [
-                'images/bg4.avif', 
-                'images/bg5.avif', 
-                'images/bg6.avif'
-            ];
-            $(remainingBgs).each(function() { $('<img/>')[0].src = this; });
-        }
-
+    /* - 2. GALLERY MEDIA PRELOADER - */
+    function preloadGalleryMedia() {
         let galleryImagesToPreload = [];
         $('.gallery-item').each(function() {
             const srcs = $(this).attr('data-src').split(',');
@@ -63,18 +50,7 @@ $(document).ready(function() {
         });
     }
 
-    /* - 3. BACKGROUND CYCLER - */
-    let currentBgIndex = 1;
-    const totalBgs = 6;
-
-    $('.magic-trigger').on('mouseenter', function() {
-        let nextBgIndex = (currentBgIndex % totalBgs) + 1;
-        $(`.bg-${currentBgIndex}`).css('opacity', 0);
-        $(`.bg-${nextBgIndex}`).css('opacity', 1);
-        currentBgIndex = nextBgIndex;
-    });
-
-    /* - 4. LIGHTBOX SEAMLESS SLIDER & TOUCH SUPPORT - */
+    /* - 3. LIGHTBOX SEAMLESS SLIDER & TOUCH SUPPORT - */
     const $galleryItems = $('.gallery-item');
     let currentProjectIndex = 0;
     let currentImages = []; 
@@ -156,7 +132,7 @@ $(document).ready(function() {
         }
     });
 
-    /* - 5. CONTACT FORM SUBMISSION - */
+    /* - 4. CONTACT FORM SUBMISSION - */
     $('#contact-form').on('submit', function(e) {
         e.preventDefault(); 
         const $form = $(this);
