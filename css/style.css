@@ -102,7 +102,7 @@ main { flex-grow: 1; }
 
 .gallery-item { position: relative; width: var(--thumb-width); height: var(--thumb-height); background-color: var(--light-grey); background-size: cover; background-position: center; cursor: pointer; }
 
-/* Unified 80% white overlay for all gallery items */
+/* Unified 80% BLACK overlay for all gallery items */
 .gallery-item::after { 
     content: ""; 
     position: absolute; 
@@ -110,7 +110,7 @@ main { flex-grow: 1; }
     left: 0; 
     width: 100%; 
     height: 100%; 
-    background-color: var(--white);
+    background-color: var(--black);
     opacity: 0; 
     transition: opacity 0.2s; 
     z-index: 1; 
@@ -131,7 +131,7 @@ main { flex-grow: 1; }
     margin: 0;
     padding: 0;
     transform: none;
-    color: var(--black);
+    color: var(--hover-pink);
     font-family: 'StolzlBook', sans-serif;
     font-size: 32px; 
     text-transform: uppercase;
@@ -208,12 +208,33 @@ main { flex-grow: 1; }
 
 /* - 7. LIGHTBOX - */
 .lightbox-container { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; background-color: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
-.lightbox-content { display: flex; flex-direction: column; max-width: 90%; max-height: 90%; width: 100%; align-items: center; z-index: 1002; position: relative;}
-.project-text { margin-bottom: var(--space-m); color: var(--white); text-align: center; }
+
+/* Fit the content width exactly to the image's intrinsic width */
+.lightbox-content { 
+    display: flex; 
+    flex-direction: column; 
+    max-width: 90%; 
+    max-height: 90%; 
+    width: fit-content; 
+    margin: 0 auto;
+    align-items: center; 
+    z-index: 1002; 
+    position: relative;
+}
+
+/* Force the text wrapper to respect the image's width */
+.project-text { 
+    margin-bottom: var(--space-m); 
+    color: var(--white); 
+    text-align: center; 
+    width: 0; 
+    min-width: 100%; 
+    box-sizing: border-box;
+}
 
 /* MuseoSans300 for lightbox text */
 #project-title { font-weight: 700; margin-bottom: var(--space-s); font-family: 'MuseoSans300', sans-serif; }
-#project-desc { font-family: 'MuseoSans300', sans-serif; }
+#project-desc { font-family: 'MuseoSans300', sans-serif; line-height: 1.4; }
 
 #page-counter { color: var(--pink); font-family: 'MuseoSans300', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; margin-top: var(--space-m); visibility: hidden; }
 
