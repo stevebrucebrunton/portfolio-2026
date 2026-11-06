@@ -84,7 +84,7 @@ main { flex-grow: 1; }
     font-size: 22px;
     margin-left: var(--space-l); 
     font-weight: 400; 
-    color: var(--black); 
+    color: #444444; 
     transition: color 0.2s;
 }
 
@@ -222,11 +222,11 @@ main { flex-grow: 1; }
     position: relative;
 }
 
-/* Force the text wrapper to respect the image's width */
+/* Force the text wrapper to respect the image's width and left justify text */
 .project-text { 
     margin-bottom: var(--space-m); 
     color: var(--white); 
-    text-align: center; 
+    text-align: left; 
     width: 0; 
     min-width: 100%; 
     box-sizing: border-box;
@@ -310,7 +310,7 @@ main { flex-grow: 1; }
 
     .project-text { 
         flex-shrink: 0; 
-        text-align: center; 
+        text-align: left; 
         margin-bottom: 16px; 
         width: 100%;
     }
@@ -328,7 +328,7 @@ main { flex-grow: 1; }
 
     #page-counter { 
         margin-top: 12px; 
-        text-align: center; 
+        text-align: left; 
         flex-shrink: 0; 
     }
 
