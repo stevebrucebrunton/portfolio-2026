@@ -207,7 +207,7 @@ main { flex-grow: 1; }
 #success-message h3 { margin: 0; color: var(--pink); }
 
 /* - 7. LIGHTBOX - */
-.lightbox-container { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; background-color: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+.lightbox-container { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; background-color: rgba(0,0,0,0.98); align-items: center; justify-content: center; }
 
 /* Fit the content width exactly to the image's intrinsic width */
 .lightbox-content { 
@@ -224,8 +224,8 @@ main { flex-grow: 1; }
 
 /* Force the text wrapper to respect the image's width and left justify text */
 .project-text { 
-    margin-top: var(--space-m); 
-    margin-bottom: 0;
+    margin-top: var(--space-l); 
+    margin-bottom: 0; 
     color: var(--white); 
     text-align: left; 
     width: 0; 
@@ -234,10 +234,10 @@ main { flex-grow: 1; }
 }
 
 /* MuseoSans300 for lightbox text */
-#project-title { font-weight: 700; margin-bottom: var(--space-s); font-family: 'MuseoSans300', sans-serif; }
+#project-title { font-weight: 700; margin-bottom: var(--space-s); font-family: 'MuseoSans300', sans-serif; color: var(--hover-pink); }
 #project-desc { font-family: 'MuseoSans300', sans-serif; line-height: 1.4; }
 
-#page-counter { color: var(--pink); font-family: 'MuseoSans300', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; margin-top: var(--space-m); visibility: hidden; }
+#page-counter { color: var(--pink); font-family: 'MuseoSans300', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; margin-bottom: var(--space-m); width: 100%; text-align: left; visibility: hidden; }
 
 #lightbox-img { max-width: 100%; max-height: 70vh; object-fit: contain; cursor: pointer; }
 
@@ -312,7 +312,7 @@ main { flex-grow: 1; }
     .project-text { 
         flex-shrink: 0; 
         text-align: left; 
-        margin-top: 16px; 
+        margin-top: 24px; 
         margin-bottom: 0;
         width: 100%;
     }
@@ -329,9 +329,10 @@ main { flex-grow: 1; }
     }
 
     #page-counter { 
-        margin-top: 12px; 
+        margin-bottom: 12px; 
         text-align: left; 
         flex-shrink: 0; 
+        width: 100%;
     }
 
     .nav-btn { 
