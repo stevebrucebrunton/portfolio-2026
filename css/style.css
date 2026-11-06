@@ -233,8 +233,8 @@ main { flex-grow: 1; }
     box-sizing: border-box;
 }
 
-/* MuseoSans300 for lightbox text */
-#project-title { font-weight: 700; margin-bottom: var(--space-s); font-family: 'MuseoSans300', sans-serif; color: var(--hover-pink); }
+/* MuseoSans300 for lightbox text, respecting line breaks */
+#project-title { font-weight: 700; margin-bottom: var(--space-s); font-family: 'MuseoSans300', sans-serif; color: var(--hover-pink); white-space: pre-wrap; }
 #project-desc { font-family: 'MuseoSans300', sans-serif; line-height: 1.4; }
 
 #page-counter { color: var(--pink); font-family: 'MuseoSans300', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; margin-bottom: var(--space-m); width: 100%; text-align: left; visibility: hidden; }
