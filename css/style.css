@@ -249,11 +249,14 @@ main { flex-grow: 1; }
 }
 
 .lightbox-image-wrapper {
-    position: relative; /* Arrows anchor vertically and horizontally to the image */
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: static; 
+    max-width: 100%;
 }
 
-/* Force the text wrapper to respect the image's width */
+/* Force the text wrapper to respect the image's width and left justify text */
 .project-text { 
     margin-top: var(--space-l); 
     margin-bottom: 0; 
@@ -282,7 +285,7 @@ main { flex-grow: 1; }
 
 .close-btn { position: absolute; top: 32px; right: 48px; color: var(--white); font-size: 48px; cursor: pointer; z-index: 1003; transition: color 0.2s;}
 
-/* PERFECT CENTERING AND ANTI-OVERLAP ARROWS */
+/* PERFECT CENTERING AND ANTI-OVERLAP ARROWS (DESKTOP) */
 .nav-btn { 
     position: absolute; 
     top: 50%; 
@@ -296,14 +299,14 @@ main { flex-grow: 1; }
     transition: color 0.2s;
 }
 
-/* Pushes the right edge of the button strictly outside the left edge of the image */
+/* Pushes the right edge of the button strictly outside the left edge of the content */
 .prev-btn { 
     right: 100%; 
     left: auto; 
     margin-right: 16px; 
 }
 
-/* Pushes the left edge of the button strictly outside the right edge of the image */
+/* Pushes the left edge of the button strictly outside the right edge of the content */
 .next-btn { 
     left: 100%; 
     right: auto; 
@@ -366,11 +369,19 @@ main { flex-grow: 1; }
         flex-direction: column;
         justify-content: center; 
         align-items: center;
-        width: fit-content; 
-        max-width: calc(100vw - 110px); /* Guarantees 55px of empty space for the mobile arrows */
+        width: 100%; 
+        max-width: 100vw; /* Take full screen width */
         max-height: calc(100dvh - 160px); 
-        padding: 0; /* Cleared padding to use max-width constraint instead */
+        padding: 0 16px; /* Keeps text and image away from exact screen edge */
         box-sizing: border-box;
+    }
+
+    .lightbox-image-wrapper {
+        position: relative; /* Mobile arrows strictly anchor vertically to THIS wrapper's height */
+        width: 100%; /* Forces wrapper to span full screen bounds minus padding */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .project-text { 
@@ -378,8 +389,7 @@ main { flex-grow: 1; }
         text-align: left; 
         margin-top: 24px; 
         margin-bottom: 0;
-        width: 0; /* Restores the perfect text-wrapping width */
-        min-width: 100%;
+        width: 100%;
     }
     
     #project-title { 
@@ -394,7 +404,8 @@ main { flex-grow: 1; }
         flex-grow: 0; 
         max-height: 50vh; 
         width: auto; 
-        max-width: 100%; 
+        /* Mathematically guarantees at least 36px of empty space on each side of the image */
+        max-width: calc(100% - 72px); 
         object-fit: contain; 
     }
 
@@ -406,11 +417,17 @@ main { flex-grow: 1; }
     }
 
     .nav-btn { 
-        font-size: 36px; 
-        padding: 12px 6px; 
+        position: absolute; 
+        top: 50%; 
+        bottom: auto; 
+        transform: translateY(-50%); 
+        font-size: 20px; /* Scaled down further */
+        padding: 16px 12px; /* Leaves a generous invisible touch target */
+        z-index: 1010; 
+        font-weight: normal; 
     }
     
-    /* Safely positioned outside the image boundaries */
-    .prev-btn { margin-right: 4px; } 
-    .next-btn { margin-left: 4px; } 
+    /* Pushed to the far outer edges of the screen, permanently apart from the image */
+    .prev-btn { left: -8px; right: auto; margin: 0; } 
+    .next-btn { right: -8px; left: auto; margin: 0; } 
 }
