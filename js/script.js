@@ -1,64 +1,169 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const projectTitle = document.getElementById('project-title');
-    const projectDesc = document.getElementById('project-desc');
-    const pageCounter = document.getElementById('page-counter');
-    
-    const closeBtn = document.querySelector('.close-btn');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    
-    const cards = document.querySelectorAll('.project-card');
-    let currentIndex = 0;
+$(document).ready(function() {
+    console.log("PORTFOLIO LOGIC LOADED");
 
-    // Open lightbox
-    cards.forEach((card, index) => {
-        card.addEventListener('click', () => {
-            currentIndex = index;
-            updateLightbox();
-            lightbox.classList.add('active');
-        });
+    /* - 1. TRAFFIC CONTROLLER: VIP PRELOAD & GRID REVEAL - */
+    const $grid = $('.gallery-grid');
+    let essentialMedia = ['images/bg2.avif']; 
+    
+    $('.gallery-item').each(function() {
+        let bgUrl = $(this).css('background-image');
+        bgUrl = bgUrl.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        if (bgUrl && bgUrl !== 'none') {
+            essentialMedia.push(bgUrl);
+        }
     });
 
-    // Update lightbox content
-    function updateLightbox() {
-        const activeCard = cards[currentIndex];
-        const imgElement = activeCard.querySelector('img');
+    function revealGrid() {
+        $grid.addClass('loaded');
+        preloadGalleryMedia(); 
+    }
+
+    if (essentialMedia.length > 0) {
+        let loadedCount = 0;
+        $.each(essentialMedia, function(i, src) {
+            let img = new Image();
+            img.onload = img.onerror = function() {
+                loadedCount++;
+                if (loadedCount === essentialMedia.length) {
+                    revealGrid();
+                }
+            };
+            img.src = src;
+        });
         
-        lightboxImg.src = imgElement.getAttribute('data-full') || imgElement.src;
-        projectTitle.textContent = activeCard.getAttribute('data-title');
-        projectDesc.textContent = activeCard.getAttribute('data-desc');
-        pageCounter.textContent = `${currentIndex + 1} / ${cards.length}`;
+        setTimeout(function() {
+            if (!$grid.hasClass('loaded')) revealGrid();
+        }, 2500);
+    } else {
+        revealGrid();
     }
 
-    // Close lightbox
-    function closeLightbox() {
-        lightbox.classList.remove('active');
+    /* - 2. GALLERY MEDIA PRELOADER - */
+    function preloadGalleryMedia() {
+        let galleryImagesToPreload = [];
+        $('.gallery-item').each(function() {
+            const srcs = $(this).attr('data-src').split(',');
+            srcs.forEach(src => galleryImagesToPreload.push(src.trim()));
+        });
+        $(galleryImagesToPreload).each(function() { 
+            $('<img/>')[0].src = this; 
+        });
     }
 
-    closeBtn.addEventListener('click', closeLightbox);
+    /* - 3. LIGHTBOX SEAMLESS SLIDER & TOUCH SUPPORT - */
+    const $galleryItems = $('.gallery-item');
+    let currentProjectIndex = 0;
+    let currentImages = []; 
+    let currentSubIndex = 0; 
 
-    // Navigate projects
-    function showNext() {
-        currentIndex = (currentIndex === cards.length - 1) ? 0 : currentIndex + 1;
-        updateLightbox();
+    // Mobile Touch and Hold Support for Color Overlays
+    $galleryItems.on('touchstart', function() {
+        $(this).addClass('touch-active');
+    }).on('touchend touchcancel', function() {
+        $(this).removeClass('touch-active');
+    });
+
+    function updateLightboxContent() {
+        $('#lightbox-img').attr('src', currentImages[currentSubIndex]);
+
+        if (currentImages.length > 1) {
+            $('#page-counter').text(`${currentSubIndex + 1} / ${currentImages.length}`).css('visibility', 'visible');
+        } else {
+            $('#page-counter').css('visibility', 'hidden');
+        }
     }
 
-    function showPrev() {
-        currentIndex = (currentIndex === 0) ? cards.length - 1 : currentIndex - 1;
-        updateLightbox();
+    function openLightbox(projectIndex, subIndex = 0) {
+        currentProjectIndex = projectIndex;
+        const $item = $galleryItems.eq(projectIndex);
+        const srcData = $item.attr('data-src');
+        currentImages = srcData.split(',').map(s => s.trim());
+        currentSubIndex = subIndex;
+
+        $('#project-title').text($item.attr('data-title'));
+        $('#project-desc').text($item.attr('data-desc'));
+
+        updateLightboxContent();
+
+        if (!$('#lightbox').is(':visible')) {
+            $('#lightbox').css('display', 'flex').hide().fadeIn(200);
+        }
     }
 
-    nextBtn.addEventListener('click', showNext);
-    prevBtn.addEventListener('click', showPrev);
+    function nextMedia() {
+        if (currentSubIndex < currentImages.length - 1) {
+            currentSubIndex++;
+            updateLightboxContent();
+        } else {
+            let newIndex = currentProjectIndex + 1;
+            if (newIndex >= $galleryItems.length) newIndex = 0;
+            openLightbox(newIndex, 0);
+        }
+    }
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
+    function prevMedia() {
+        if (currentSubIndex > 0) {
+            currentSubIndex--;
+            updateLightboxContent();
+        } else {
+            let newIndex = currentProjectIndex - 1;
+            if (newIndex < 0) newIndex = $galleryItems.length - 1;
+            const prevItemSrc = $galleryItems.eq(newIndex).attr('data-src');
+            const prevImages = prevItemSrc.split(',').map(s => s.trim());
+            openLightbox(newIndex, prevImages.length - 1);
+        }
+    }
+
+    $galleryItems.on('click', function() { openLightbox($galleryItems.index(this)); });
+    $('.next-btn, #lightbox-img').on('click', function(e) { e.stopPropagation(); nextMedia(); });
+    $('.prev-btn').on('click', function(e) { e.stopPropagation(); prevMedia(); });
+
+    $('.close-btn, #lightbox').on('click', function(e) {
+        if (!$(e.target).closest('.lightbox-content').length || $(e.target).is('.close-btn')) {
+            $('#lightbox').fadeOut(200);
+        }
+    });
+
+    $(document).on('keydown', function(e) {
+        if ($('#lightbox').is(':visible')) {
+            if (e.which === 37) { prevMedia(); }
+            if (e.which === 39) { nextMedia(); }
+            if (e.which === 27) { $('.close-btn').trigger('click'); }
+        }
+    });
+
+    /* - 4. CONTACT FORM SUBMISSION - */
+    $('#contact-form').on('submit', function(e) {
+        e.preventDefault(); 
+        const $form = $(this);
+        const $message = $('#success-message');
+        const $submitBtn = $form.find('.submit-btn');
         
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') showNext();
-        if (e.key === 'ArrowLeft') showPrev();
+        $submitBtn.prop('disabled', true).text('SENDING...');
+        
+        $.ajax({
+            method: "POST",
+            url: "https://formsubmit.co/ajax/stevebrucebrunton@gmail.com",
+            dataType: "json",
+            accepts: "application/json",
+            data: $form.serialize(),
+            success: function() {
+                $form.fadeOut(300, function() {
+                    $message.fadeIn(300);
+                    $submitBtn.prop('disabled', false).text('SEND');
+                    setTimeout(function() {
+                        $message.fadeOut(300, function() { 
+                            $form[0].reset(); 
+                            $form.fadeIn(300); 
+                        });
+                    }, 3000); 
+                });
+            },
+            error: function(err) {
+                alert("If this is your first test, please check your email to activate the form! Otherwise, something went wrong.");
+                console.log(err);
+                $submitBtn.prop('disabled', false).text('SEND');
+            }
+        });
     });
 });

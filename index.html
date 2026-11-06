@@ -3,54 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steve Brunton | Graphic Design & Illustration</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Work | Steve Brunton</title>
+    <meta name="description" content="Portfolio of Steve Brunton, a Toronto-based graphic designer specializing in minimalist and illustrative design.">
+    
+    <meta property="og:title" content="Work | Steve Brunton">
+    <meta property="og:description" content="Portfolio of Steve Brunton, a Toronto-based graphic designer specializing in minimalist and illustrative design.">
+    <meta property="og:image" content="https://www.stevebrunton.com/images/headshot.png">
+    <meta property="og:url" content="https://www.stevebrunton.com">
+    
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <link rel="preload" as="image" href="images/bg2.avif">
+    
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="site-header">
-        <h1>Steve Brunton</h1>
-        <nav>
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
+    <div class="bg-layer"></div>
 
-    <main id="work">
-        <div class="gallery-grid">
-            <!-- Add your project thumbnails here. Data attributes feed the lightbox. -->
-            <article class="project-card" data-index="0" data-title="Rawhead Rex" data-desc="Spec poster utilizing RL Aqva font and a smoky coral palette with a brutalist layout.">
-                <img src="images/rawhead-thumb.jpg" alt="Rawhead Rex Poster" data-full="images/rawhead-full.jpg">
-            </article>
+    <div class="site-wrapper">
+        <header>
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="images/logo1.svg" class="main-logo" alt="Steve Brunton Logo">
+                </a>
+            </div>
+            <nav class="main-nav" aria-label="Main Navigation">
+                <a href="index.html" class="active">Work</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
 
-            <article class="project-card" data-index="1" data-title="Met Rentals" data-desc="Art catalogue featuring minimalist baroque styling and photo-manipulated party scenes.">
-                <img src="images/met-thumb.jpg" alt="Met Rentals Catalogue" data-full="images/met-full.jpg">
-            </article>
+        <main>
+            <div class="gallery-grid">
+                <!-- 1. Top Left: The Met Rentals -->
+                <div class="gallery-item" tabindex="0" role="img" aria-label="The Met Rentals catalogue" style="background-image: url('images/thumb1.png');" data-src="images/mr1.avif, images/mr2.avif, images/mr3.avif, images/mr4.avif, images/mr5.avif, images/mr6.avif, images/mr7.avif" data-title="THE MET RENTALS" data-desc="A multi-page catalogue concept for a fictional Metropolitan Museum of Art rental service."></div>
+                
+                <!-- 2. Top Right: Faust -->
+                <div class="gallery-item" tabindex="0" role="img" aria-label="Faust book cover" style="background-image: url('images/thumb2.png');" data-src="images/image2.avif" data-title="FAUST" data-desc="A minimalist cover design for Goethe's tragic play."></div>
+                
+                <!-- 3. Middle Left: Iron Kettle -->
+                <div class="gallery-item" tabindex="0" role="img" aria-label="Iron Kettle Tea Packaging" style="background-image: url('images/thumb3.png');" data-src="images/ik1.avif, images/ik2.avif" data-title="IRON KETTLE" data-desc="A complete packaging design and visual system for a premium mint green tea line."></div>
+                
+                <!-- 4. Middle Right: Rawhead Rex -->
+                <div class="gallery-item" tabindex="0" role="img" aria-label="Rawhead Rex poster" style="background-image: url('images/thumb4.png');" data-src="images/image4.avif" data-title="RAWHEAD REX" data-desc="A spec poster designed for a Clive Barker film retrospective at the Revue Cinema in Toronto."></div>
+                
+                <!-- 5. Bottom Left: Dorian Gray -->
+                <div class="gallery-item" tabindex="0" role="img" aria-label="The Picture of Dorian Gray covers" style="background-image: url('images/thumb5.png');" data-src="images/image5_1.avif, images/image5_2.avif, images/image5_3.avif" data-title="THE PICTURE&#10;OF DORIAN GRAY" data-desc="Wrap-around cover designs for Oscar Wilde's classic novel."></div>
+                
+                <!-- 6. Bottom Right: Night of the Living Dead -->
+                <div class="gallery-item" tabindex="0" role="img" aria-label="Night of the Living Dead poster" style="background-image: url('images/thumb6.png');" data-src="images/image6.avif" data-title="NIGHT OF&#10;THE LIVING DEAD" data-desc="A retro pulp style poster design for the seminal 1968 film."></div>
+                
+                <!-- 7. Toronto After Dark -->
+                <div class="gallery-item" tabindex="0" role="img" aria-label="Toronto After Dark logo redesign" style="background-image: url('images/thumb7.png');" data-src="images/image7_1.avif, images/image7_2.avif" data-title="TORONTO AFTER DARK" data-desc="A logo redesign concept for the Toronto After Dark Film Festival."></div>
+                
+                <!-- 8. Milkweed -->
+                <div class="gallery-item" tabindex="0" role="img" aria-label="Milkweed poster" style="background-image: url('images/thumb8.png');" data-src="images/image8.avif" data-title="MILKWEED" data-desc="A promotional gig poster for the UK dark folk band Milkweed, performing at the Pianodrome."></div>
+            </div>
+        </main>
+    </div>
 
-            <article class="project-card" data-index="2" data-title="Iron Kettle" data-desc="Tea packaging with a muted olive and chocolate palette, focused on a health-store aesthetic.">
-                <img src="images/ironkettle-thumb.jpg" alt="Iron Kettle Packaging" data-full="images/ironkettle-full.jpg">
-            </article>
-
-            <article class="project-card" data-index="3" data-title="Milkweed" data-desc="Concert poster channeling a medieval British woodcut style through scanned ink textures.">
-                <img src="images/milkweed-thumb.jpg" alt="Milkweed Poster" data-full="images/milkweed-full.jpg">
-            </article>
-        </div>
-    </main>
-
-    <!-- Lightbox Overlay -->
     <div id="lightbox" class="lightbox-container" role="dialog" aria-modal="true">
         <span class="close-btn" tabindex="0" role="button" aria-label="Close Project Viewer">&times;</span>
         <span class="nav-btn prev-btn" tabindex="0" role="button" aria-label="Previous Project">&#10094;</span>
         <span class="nav-btn next-btn" tabindex="0" role="button" aria-label="Next Project">&#10095;</span>
         <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="Detailed view">
             <div class="project-text">
                 <h3 id="project-title"></h3>
                 <p id="project-desc"></p>
             </div>
+            <img id="lightbox-img" src="images/mr1.avif" alt="Detailed view">
             <div id="page-counter"></div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
