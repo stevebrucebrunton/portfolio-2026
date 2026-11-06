@@ -81,7 +81,7 @@ main { flex-grow: 1; }
 
 .main-nav a { 
     font-family: 'Stolzl', sans-serif;
-    font-size: 20px;
+    font-size: 22px;
     margin-left: var(--space-l); 
     font-weight: 400; 
     color: var(--black); 
