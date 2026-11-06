@@ -398,7 +398,7 @@ flex-grow: 0;
 max-height: 50vh; 
 width: auto; 
 /* Mathematically guarantees at least 36px of empty space on each side of the image */
-max-width: calc(100% - 72px); /* Increased from 48px to allow more image space */
+max-width: calc(100% - var(--space-xl)); /* Increased spacing for wider images */
 object-fit: contain; 
     }
 
@@ -414,24 +414,23 @@ position: absolute;
 top: 50%; 
 bottom: auto; 
 transform: translateY(-50%); 
-font-size: 20px; /* Scaled down further */
-padding: 16px 12px; /* Leaves a generous invisible touch target */
+font-size: 20px; /* Scaled down for mobile */
+padding: 16px 12px; /* Larger touch target */
 z-index: 1010; 
-font-weight: normal; 
     }
 /* Pushed to the far outer edges of the screen, permanently apart from the image */
-.prev-btn { left: -8px; right: auto; margin: 0; } 
-.next-btn { right: -8px; left: auto; margin: 0; } 
+.prev-btn { left: -48px; right: auto; margin: 0; } 
+.next-btn { right: -48px; left: auto; margin: 0; }
 
 #project-title, #project-desc {
-font-size: clamp(12px, 3vw, 20px); /* Responsive text sizing */
-max-width: calc(100% - 72px); /* Aligns with image edge */
+font-size: clamp(12px, 3vw, 20px);
+max-width: calc(100% - var(--space-xl)); /* Aligns with image edge */
 width: fit-content;
 }
 
-.gallery-item::before { /* Gallery text */
-font-size: clamp(12px, 3vw, 20px);
-max-width: calc(100% - 48px); /* Aligns with image edge */
+.gallery-item::before { 
+font-size: clamp(12px, 3vw, 20px); 
+max-width: calc(100% - var(--space-xl)); /* Aligns with image edge */
 width: fit-content;
 }
 }
