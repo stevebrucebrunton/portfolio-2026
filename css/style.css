@@ -234,7 +234,15 @@ main { flex-grow: 1; }
 }
 
 /* MuseoSans300 for lightbox text, respecting line breaks */
-#project-title { font-weight: 700; margin-bottom: var(--space-s); font-family: 'MuseoSans300', sans-serif; color: var(--hover-pink); white-space: pre-wrap; }
+#project-title { 
+    font-weight: 700; 
+    margin-top: 10px; 
+    margin-bottom: 2px; 
+    font-family: 'MuseoSans300', sans-serif; 
+    color: var(--hover-pink); 
+    line-height: 1.05; 
+    white-space: pre-wrap; 
+}
 #project-desc { font-family: 'MuseoSans300', sans-serif; line-height: 1.4; }
 
 #page-counter { color: var(--pink); font-family: 'MuseoSans300', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; margin-bottom: var(--space-m); width: 100%; text-align: left; visibility: hidden; }
@@ -317,7 +325,12 @@ main { flex-grow: 1; }
         width: 100%;
     }
     
-    #project-title { font-size: 28px; margin-bottom: 4px; line-height: 1.1; }
+    #project-title { 
+        font-size: 28px; 
+        margin-top: 8px;
+        margin-bottom: 2px; 
+        line-height: 1.05; 
+    }
     #project-desc { font-size: 14px; margin-bottom: 0; }
 
     #lightbox-img { 
