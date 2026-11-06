@@ -378,12 +378,12 @@ main { flex-grow: 1; }
         top: 50%; 
         bottom: auto; 
         transform: translateY(-50%); 
-        font-size: 40px; 
-        padding: 8px 12px; 
+        font-size: 28px; 
+        padding: 12px 6px; 
         z-index: 1010; 
         font-weight: normal; 
     }
     
-    .prev-btn { left: 4px; } 
-    .next-btn { right: 4px; } 
+    .prev-btn { left: 2px; } 
+    .next-btn { right: 2px; } 
 }
