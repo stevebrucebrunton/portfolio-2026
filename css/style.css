@@ -98,16 +98,11 @@ main { flex-grow: 1; }
     grid-template-columns: repeat(2, var(--thumb-width)); 
     gap: var(--grid-gap); 
     justify-content: center; 
-    visibility: hidden; 
-}
-
-.gallery-grid.loaded {
-    visibility: visible; 
 }
 
 .gallery-item { position: relative; width: var(--thumb-width); height: var(--thumb-height); background-color: var(--light-grey); background-size: cover; background-position: center; cursor: pointer; }
 
-/* Unified 65% white overlay for all gallery items */
+/* Unified 80% white overlay for all gallery items */
 .gallery-item::after { 
     content: ""; 
     position: absolute; 
@@ -123,17 +118,19 @@ main { flex-grow: 1; }
 
 .gallery-item:hover::after,
 .gallery-item.touch-active::after { 
-    opacity: 0.65; 
+    opacity: 0.8; 
 }
 
-/* Central Hover Text - Top-Left Justified, 60% Width, StolzlBook */
+/* Hover Text - Strictly Top-Left Justified */
 .gallery-item::before {
     content: attr(data-title);
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    margin: 0;
+    padding: 0;
+    transform: none;
     color: var(--black);
     font-family: 'StolzlBook', sans-serif;
     font-size: 34px; 
@@ -144,6 +141,7 @@ main { flex-grow: 1; }
     opacity: 0;
     transition: opacity 0.2s;
     pointer-events: none; 
+    display: block;
 }
 
 .gallery-item:hover::before,
