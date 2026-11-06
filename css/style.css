@@ -224,7 +224,8 @@ main { flex-grow: 1; }
 
 /* Force the text wrapper to respect the image's width and left justify text */
 .project-text { 
-    margin-bottom: var(--space-m); 
+    margin-top: var(--space-m); 
+    margin-bottom: 0;
     color: var(--white); 
     text-align: left; 
     width: 0; 
@@ -311,7 +312,8 @@ main { flex-grow: 1; }
     .project-text { 
         flex-shrink: 0; 
         text-align: left; 
-        margin-bottom: 16px; 
+        margin-top: 16px; 
+        margin-bottom: 0;
         width: 100%;
     }
     
