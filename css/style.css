@@ -133,7 +133,7 @@ main { flex-grow: 1; }
     transform: none;
     color: var(--black);
     font-family: 'StolzlBook', sans-serif;
-    font-size: 34px; 
+    font-size: 32px; 
     text-transform: uppercase;
     text-align: left;
     line-height: 1.1;
