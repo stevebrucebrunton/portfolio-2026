@@ -66,11 +66,17 @@ THE LIVING DEAD" data-desc="Retro-inspired poster for the seminal 1968 film."></
 
     <div id="lightbox" class="lightbox-container" role="dialog" aria-modal="true">
         <span class="close-btn" tabindex="0" role="button" aria-label="Close Project Viewer">&times;</span>
-        <span class="nav-btn prev-btn" tabindex="0" role="button" aria-label="Previous Project">&#10094;</span>
-        <span class="nav-btn next-btn" tabindex="0" role="button" aria-label="Next Project">&#10095;</span>
+        
         <div class="lightbox-content">
             <div id="page-counter"></div>
-            <img id="lightbox-img" src="images/mr1.avif" alt="Detailed view">
+            
+            <!-- NEW WRAPPER FOR IMAGE AND ARROWS -->
+            <div class="lightbox-image-wrapper">
+                <span class="nav-btn prev-btn" tabindex="0" role="button" aria-label="Previous Project">&#10094;</span>
+                <img id="lightbox-img" src="images/mr1.avif" alt="Detailed view">
+                <span class="nav-btn next-btn" tabindex="0" role="button" aria-label="Next Project">&#10095;</span>
+            </div>
+
             <div class="project-text">
                 <h3 id="project-title"></h3>
                 <p id="project-desc"></p>
