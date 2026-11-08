@@ -361,14 +361,16 @@ max-width: calc(100vw - 64px);
 max-height: calc(100dvh - 120px); 
 padding: 0;
 box-sizing: border-box;
+min-width: 0;
 }
 
 .lightbox-image-wrapper {
-position: static; 
+position: relative; 
 width: 100%; 
 display: flex;
 justify-content: center;
 align-items: center;
+min-width: 0;
 }
 
 .project-text { 
@@ -409,17 +411,27 @@ min-width: 100%;
 }
 
 .nav-btn { 
-position: fixed; 
+position: absolute; 
 top: 50%; 
 bottom: auto; 
-transform: translateY(-50%); 
 font-size: 24px; 
 padding: 16px 8px; 
 z-index: 1010; 
 }
 
-.prev-btn { left: 4px; right: auto; margin: 0; } 
-.next-btn { right: 4px; left: auto; margin: 0; }
+.prev-btn { 
+left: 50%; 
+right: auto; 
+transform: translate(calc(-50vw + 4px), -50%); 
+margin: 0; 
+} 
+
+.next-btn { 
+right: 50%; 
+left: auto; 
+transform: translate(calc(50vw - 4px), -50%); 
+margin: 0; 
+}
 
 .gallery-item::before { 
 font-size: clamp(12px, 3vw, 20px); 
