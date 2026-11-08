@@ -53,7 +53,6 @@
 html, body { 
 overflow-x: hidden; 
 width: 100%; 
-scrollbar-gutter: stable; 
 }
 body { font-family: var(--font-main); color: var(--black); line-height: 1.5; margin: 0; padding: 0; background-color: var(--white); -webkit-font-smoothing: antialiased; font-variant-ligatures: no-contextual; font-feature-settings: "calt" 0; }
 h3 { font-size: 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
@@ -92,17 +91,15 @@ transition: color 0.2s;
 /* - 4. GALLERY GRID - */
 .gallery-grid { 
 display: grid; 
-grid-template-columns: repeat(2, minmax(0, var(--thumb-width))); 
+grid-template-columns: repeat(2, var(--thumb-width)); 
 gap: var(--grid-gap); 
 justify-content: center; 
 }
 
 .gallery-item { 
 position: relative; 
-width: 100%;
-max-width: var(--thumb-width);
-aspect-ratio: 480 / 300;
-height: auto; 
+width: var(--thumb-width); 
+height: var(--thumb-height); 
 background-color: var(--light-grey); 
 background-size: cover; 
 background-position: center; 
