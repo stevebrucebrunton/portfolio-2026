@@ -366,10 +366,8 @@ min-width: 0;
 
 .lightbox-image-wrapper {
 position: relative; 
-width: 100%; 
-display: flex;
-justify-content: center;
-align-items: center;
+display: block; 
+width: 100%;
 min-width: 0;
 }
 
@@ -396,8 +394,9 @@ margin-bottom: 0;
 
 #lightbox-img { 
 display: block;
+margin: 0 auto;
 flex-grow: 0; 
-max-height: 60vh; 
+max-height: 60dvh; 
 width: auto; 
 max-width: 100%; 
 object-fit: contain; 
@@ -415,22 +414,21 @@ min-width: 100%;
 position: absolute; 
 top: 50%; 
 bottom: auto; 
+transform: translateY(-50%); 
 font-size: 24px; 
 padding: 16px 8px; 
 z-index: 1010; 
 }
 
 .prev-btn { 
-left: 50%; 
+left: -36px; 
 right: auto; 
-transform: translate(calc(-50vw + 16px), -50%); 
 margin: 0; 
 } 
 
 .next-btn { 
-right: 50%; 
+right: -36px; 
 left: auto; 
-transform: translate(calc(50vw - 16px), -50%); 
 margin: 0; 
 }
 
